@@ -48,3 +48,13 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+
+.text-bg-image{
+  background-image: url("McAfee.png");
+  background-color: #cccccc;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
