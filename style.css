@@ -47,16 +47,8 @@ table {
     border-spacing: 0;
 }
 
-.container {
-    width: 100%;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-
-body {
+/*custom style starts here*/
+.text-bg-image{
     background-image: url("McAfee.png");
     background-color: #cccccc;
     -webkit-background-size: cover;
@@ -65,3 +57,22 @@ body {
     background-size: cover;
 }
 
+.title{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.lead{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
