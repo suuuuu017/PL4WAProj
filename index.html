@@ -135,7 +135,7 @@
     <h1 class="title">HoosHiking</h1>
     <p class="lead">Hi! Welcome to HoosHiking, your next adventure is here.</p>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Sign in</a>
+      <button href="#" class="btn btn-lg btn-light fw-bold border-white bg-white" id="signinbutton">Sign in</button>
     </p>
   </main>
 
@@ -143,6 +143,10 @@
   </footer>
 </div>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-    </body>
+    <script type="text/javascript">
+      document.getElementById("signinbutton").onclick = function () {
+        location.href = "signin.html";
+      };
+    </script>
+  </body>
 </html>

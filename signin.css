@@ -87,55 +87,7 @@ table {
     padding-bottom: 20px;
 }
 
-.loginBox{
-    background-color: #000;
-    color: #fff;
-    opacity: .5;
-    width: 320px;
-    height: 420px;
-    /*background: transparent;*/
-    /*color: #fff;*/
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
-}
+.loginbox{
 
-.inputBox{
-    text-align: center;
-    width: 80%;
-    padding: 5px;
-    margin: 5px auto;
-    border: 1px solid #fff;
-    outline: none;
-    border-bottom: 1px solid #ffffff;
-    background: transparent;
-    color: #ffffff;
-    -webkit-box-align: center;
 }
-
-.loginTitle{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 25px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.loginButton{
-    text-align: center;
-    width: 50%;
-    margin: 10px auto;
-    border: 1px solid #fff;
-    outline: none;
-    border-bottom: 1px solid #ffffff;
-    background: transparent;
-    color: #ffffff;
-    -webkit-box-align: center;
-}
-
 
