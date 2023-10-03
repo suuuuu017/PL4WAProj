@@ -2,8 +2,13 @@ img {
     width: 100%;
 }
 
+
 .about-me {
  
         width: 100%;
         text-align: justify;
+}
+
+div.container {
+ max-width: 60em;
 }
