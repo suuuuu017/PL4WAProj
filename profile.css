@@ -20,8 +20,8 @@ div.container {
     padding-bottom: 20px;
 }
 
-div.my-hike {
-    background-color: white !important;
-    font-size: 5px;
-    padding: 5px;
+div.row.my-hike {
+    padding: 5 px;
+    margin: 3px;
+
 }
