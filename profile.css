@@ -23,4 +23,5 @@ div.container {
 div.my-hike {
     background-color: white !important;
     font-size: 5px;
+    padding: 5px;
 }
