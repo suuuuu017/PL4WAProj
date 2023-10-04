@@ -101,7 +101,7 @@
     <link href="cover.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
-<body class="d-flex h-100 text-center text-bg-dark text-bg-image">
+<body class="d-flex h-100 text-center text-bg-dark bg-image">
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -123,20 +123,39 @@
     <header class="mb-auto">
         <div>
             <h3 class="float-md-start mb-0">HoosHiking</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end">
+            <nav class="nav nav-masthead justify-content-center float-md-end ">
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
                 <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>-->
                 <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
             </nav>
         </div>
     </header>
-
+<!--TODO: the card is tilted to the left not in the middle need fixing-->
     <main class="px-3">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <div>
+            <div class="card postBox CustomCol-4">
+                <img src="McAfee.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Hike</h5>
+                    <p class="card-text">Some description of the hike.</p>
+                    <a href="#" class="btn joinBtn">Join</a>
+                </div>
+            </div>
+            <div class="card postBox CustomCol-4" >
+                <img src="McAfee.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Hike</h5>
+                    <p class="card-text">Some description of the hike.</p>
+                    <a href="#" class="btn joinBtn">Join</a>
+                </div>
+            </div>
+            <div class="card postBox CustomCol-4" >
+                <img src="McAfee.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Hike</h5>
+                    <p class="card-text">Some description of the hike.</p>
+                    <a href="#" class="btn joinBtn">Join</a>
+                </div>
             </div>
         </div>
     </main>
