@@ -239,4 +239,5 @@ table {
     background: transparent;
     color: #ffffff;
     -webkit-box-align: center;
+    text-align: left;
 }
