@@ -186,3 +186,57 @@ table {
     color: #000;
     border: 2px solid #000000;
 }
+
+.addBtn{
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #ffffff;
+}
+
+.addBtn:hover{
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000000;
+}
+
+.postNameBox{
+    width: 90%;
+    padding: 5px;
+    margin: 5px auto;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    -webkit-box-align: center;
+}
+
+.descriptionBox{
+    width: 90%;
+    height: 100px;
+    padding: 5px;
+    margin: 5px auto;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    -webkit-box-align: center;
+}
+
+.addImgText{
+    font-family: "Times New Roman", Times, serif;
+}
+.addImgBox{
+    width: 90%;
+    padding: 5px;
+    margin: 5px auto;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    -webkit-box-align: center;
+}

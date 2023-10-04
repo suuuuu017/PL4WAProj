@@ -160,14 +160,45 @@
         </div>
     </main>
 
+    <div>
+<!--        TODO: plus not in the center dont know why-->
+        <button class="addBtn" id="postBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
+                        </div>
+                        <div>
+                            <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
+                        </div>
+                        <div class="addImgBox">
+                            <label for="myFile" class="addImgText">Picture for the post:</label>
+                            <input type="file" id="myFile" name="filename">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Post</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="mt-auto text-white-50">
     </footer>
 </div>
 </body>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-    document.getElementById("signinbutton").onclick = function () {
-        location.href = "signin.html";
-    };
+    // document.getElementById("postBtn").onclick = function () {
+    //     location.href = "signin.html";
+    // };
 </script>
 </html>
