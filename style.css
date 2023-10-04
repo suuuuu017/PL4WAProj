@@ -48,7 +48,8 @@ table {
 }
 
 /*custom style starts here*/
-.text-bg-image{
+.bg-image{
+    background-attachment: fixed;
     background-image: url("McAfee.png");
     background-color: #cccccc;
     -webkit-background-size: cover;
@@ -139,4 +140,49 @@ table {
     -webkit-box-align: center;
 }
 
+.darkHeader{
+    color: #000000;
+}
 
+.postBox{
+    background-color: #000;
+    color: #fff;
+    padding: auto;
+    margin: 10px;
+    text-align: center;
+}
+
+/* For mobile phones: */
+[class*="CustomCol-4"] {
+    width: 90%;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones and tablets: */
+    [class*="CustomCol-4"] {
+        width: 90%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .CustomCol-4 {
+        width: 30%;
+        float: left;
+    }
+}
+@media only screen and (max-width: 600px) {
+    #fadeshow {
+        display: none;
+    }
+}
+
+.joinBtn{
+    margin: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ffffff;
+}
+
+.joinBtn:hover{
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000000;
+}
