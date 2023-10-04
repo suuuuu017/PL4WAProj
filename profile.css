@@ -22,7 +22,7 @@ div {
 
 div.row.my-hike {
 
-    background-color: rgb(85, 100, 109);
+    background-color: rgb(58, 67, 73);
     border-radius: 10px;
     padding: 4px;
     margin: 3px;
@@ -33,6 +33,7 @@ div.left {
     background-color: rgb(58, 67, 73);
     border-radius: 10px;
     padding: 10px;
+    height: 80%;
 }
 
 h1.name {
@@ -43,4 +44,26 @@ h1.name {
 
 .overflow-auto::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
+}
+
+
+.my-posts {
+    padding:  10px;
+}
+
+.profile {
+    text-align: center;
+    width: 200px;
+    /* Container's dimensions */
+    
+    height: 200px;
+    -webkit-border-radius: 75%;
+    -moz-border-radius: 75%;
+    box-shadow: 0 0 0 1px #eee;
+    background: url("https://images.unsplash.com/reserve/ysPfhVSzSP2m629CW0mw_selfPortrait.jpg?fit=crop&fm=jpg&h=700&q=80&w=1225") center center no-repeat;
+    background-size: cover;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: -30px;
+    align-content: center;
 }
