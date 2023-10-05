@@ -75,6 +75,7 @@ table {
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
+
 }
 
 .text-icon{
@@ -89,5 +90,20 @@ table {
 
 .loginbox{
 
+}
+
+input:invalid {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
+  }
+
+
+input.inputBox:required {
+    background-color: ivory;
+    border: none;
+    outline: 2px solid red;
+    border-radius: 5px;
 }
 
