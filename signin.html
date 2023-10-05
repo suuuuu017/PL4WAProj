@@ -100,6 +100,7 @@
     <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
 </head>
 <body class="d-flex h-100 text-center text-bg-dark bg-image">
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -134,9 +135,13 @@
     <main class="px-3 loginBox">
         <h1 class="loginTitle">Log Into Your Account</h1>
         <div>
-            <input class="inputBox" type="input" name="username" placeholder="Username" required>
+
+            <label for="email"> UVA Email Address:</label>
+            <input id="signinEmail" class="inputBox" name="email" type="email" placeholder="computing_id@virginia.edu"/>
+            
         </div>
         <div>
+            <label> Password: </label>
             <input class="inputBox" type="password" name="password" placeholder="Password" required>
         </div>
         <div>
