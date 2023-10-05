@@ -242,3 +242,7 @@ table {
     -webkit-box-align: center;
     text-align: left;
 }
+
+#myPar:out-of-range{
+    background-color: coral;
+}
