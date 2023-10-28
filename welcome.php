@@ -137,11 +137,13 @@
 
     <!-- title page, welcome -->
     <main class="px-3">
-      <h1 class="title">HoosHiking</h1>
-      <p class="lead">Hi! Welcome to HoosHiking, your next adventure is here.</p>
-      <p class="lead">
-        <button class="btn btn-lg btn-light fw-bold border-white bg-white" id="signinbutton">Sign in</button>
-      </p>
+        <form action="?command=go2Signin" method="post">
+          <h1 class="title">HoosHiking</h1>
+          <p class="lead">Hi! Welcome to HoosHiking, your next adventure is here.</p>
+          <p class="lead">
+            <button type="submit" class="btn btn-lg btn-light fw-bold border-white bg-white" id="signinbutton">Sign in</button>
+          </p>
+        </form>
     </main>
 
     <footer class="mt-auto text-white-50">
@@ -151,11 +153,11 @@
   <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- java script that redirects to the sign in page from the index page -->
-<script>
-  document.getElementById("signinbutton").onclick = function () {
-    location.href = "signin.html";
-  };
-</script>
+<!--<script>-->
+<!--  document.getElementById("signinbutton").onclick = function () {-->
+<!--    location.href = "signin.html";-->
+<!--  };-->
+<!--</script>-->
   </body>
 
 </html>
