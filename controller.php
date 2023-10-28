@@ -2,6 +2,8 @@
 
 
 class controller {
+
+    private $input = [];
     public function __construct($input){
         session_start();
     }
@@ -18,6 +20,13 @@ class controller {
                 $this->go2Signin();
                 break;
 
+            case "register":
+                register();
+
+            case "validateRegister":
+                validateRegistry();
+                break;
+
             case "showMainPage":
                 include ("mainpage.php");
             default:
@@ -25,6 +34,10 @@ class controller {
                 $this->showWelcome();
                 break;
         }
+    }
+
+    public function register($message) {
+        include ("register.php");
     }
 
     public function showWelcome() {
@@ -35,14 +48,13 @@ class controller {
         include("./signin.php");
     }
 
-    public function showMainPage($m1 = "") {
+    public function showMainPage() {
 
-        include("mainPage.php");
+        include("./mainPage.php");
     }
 
 
     public function validateRegistry() {
-
 
         $m1 = "";
 
@@ -94,9 +106,10 @@ class controller {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">
             $m1 </div>";
 
-            $this->showMainPage($message); 
-
+            $this-> register($message); 
         }
+
+        return;
     }
 
 

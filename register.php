@@ -132,8 +132,13 @@
         </div>
     </header>
 
+
     <main class="px-3 loginBox">
         <h1 class="loginTitle">Sign Up Here!</h1>
+
+        <?=$message?>
+
+        <form action="?command=ValidateRegister" method="post">
 
         <div>
 
@@ -167,6 +172,8 @@
         <div>
             <button class="loginButton" id="loginButton">Sign Up</button>
         </div>
+
+        </form>
     </main>
 
     <footer class="mt-auto text-white-50">
