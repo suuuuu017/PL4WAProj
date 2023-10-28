@@ -125,7 +125,7 @@
         <div>
             <h1 class="float-md-start mb-0">HoosHiking</h1>
             <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="mainpage.html">Home</a>
+                <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="mainpage.php">Home</a>
                 <a class="nav-link fw-bold py-1 px-0" href="pro.html">Profile</a>
                 <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
             </nav>
@@ -134,32 +134,38 @@
 
     <main class="px-3 loginBox">
         <h1 class="loginTitle">Log Into Your Account</h1>
-        <div>
+        <form action="?command=verifylogin" method="post">
+            <div>
+                <?=$alert?>
+            </div>
+            <div>
+                <label for="email"> UVA Email Address:</label>
+                <input id="signinEmail" class="inputBox" name="email" type="email" placeholder="computing_id@virginia.edu"/>
 
-            <label for="email"> UVA Email Address:</label>
-            <input id="signinEmail" class="inputBox" name="email" type="email" placeholder="computing_id@virginia.edu"/>
-            
-        </div>
-        <div>
-            <label> Password: </label>
-            <input class="inputBox" type="password" name="password" placeholder="Password" required>
-        </div>
-        <div>
-            <button class="loginButton" id="loginButton">Log In</button>
-        </div>
-        <div>
-            <button class="loginButton" id="signUpButton">Create Account</button>
-        </div>
+            </div>
+            <div>
+                <label> Password: </label>
+                <input class="inputBox" type="password" name="password" placeholder="Password" required>
+            </div>
+            <div>
+                <button type="submit" class="loginButton" id="loginButton">Log In</button>
+            </div>
+        </form>
+        <form action="?command=register" method="post">
+            <div>
+                <button type="submit" class="loginButton" id="signUpButton">Create Account</button>
+            </div>
+        </form>
     </main>
 
     <footer class="mt-auto text-white-50">
     </footer>
 </div>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.getElementById("loginButton").onclick = function () {
-        location.href = "mainpage.html";
-    };
-</script>
+<!--<script>-->
+<!--    document.getElementById("loginButton").onclick = function () {-->
+<!--        location.href = "mainpage.html";-->
+<!--    };-->
+<!--</script>-->
 </body>
 </html>
