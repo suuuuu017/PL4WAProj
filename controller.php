@@ -4,8 +4,6 @@
 class controller {
     private $input = [];
 
-
-    private $input = [];
     public function __construct($input){
         session_start();
         $this->input = $input;
@@ -23,8 +21,15 @@ class controller {
                 $this->go2Signin();
                 break;
 
+            case "validateRegister":
+                validateRegistry();
+                break;
+
             case "showMainPage":
                 include ("mainpage.php");
+
+
+            
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -95,7 +100,7 @@ class controller {
 
         if ( $m1 === "") {
              // SAVE ALL OF THE CONTENT
-             $this->run("showMainPage");
+             $this->showMainPage();
              return;
         }
 
