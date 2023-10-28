@@ -133,28 +133,47 @@
 <!--TODO: the card is tilted to the left not in the middle need fixing-->
     <main class="px-3">
         <div>
-            <div class="card postBox CustomCol-4">
-                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-                <div class="card-body">
-                    <h2 class="card-title">Hike</h2>
-                    <p class="card-text">Some description of the hike.</p>
-                    <a href="#" class="btn joinBtn">Join</a>
-                </div>
-            </div>
+<!--            <div class="card postBox CustomCol-4">-->
+<!--                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
+<!--                <div class="card-body">-->
+<!--                    <h2 class="card-title">Hike</h2>-->
+<!--                    <p class="card-text">Some description of the hike.</p>-->
+<!--                    <a href="#" class="btn joinBtn">Join</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="card postBox CustomCol-4" >-->
+<!--                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
+<!--                <div class="card-body">-->
+<!--                    <h2 class="card-title">Hike</h2>-->
+<!--                    <p class="card-text">Some description of the hike.</p>-->
+<!--                    <a href="#" class="btn joinBtn">Join</a>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="card postBox CustomCol-4" >
                 <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
                 <div class="card-body">
                     <h2 class="card-title">Hike</h2>
                     <p class="card-text">Some description of the hike.</p>
-                    <a href="#" class="btn joinBtn">Join</a>
-                </div>
-            </div>
-            <div class="card postBox CustomCol-4" >
-                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-                <div class="card-body">
-                    <h2 class="card-title">Hike</h2>
-                    <p class="card-text">Some description of the hike.</p>
-                    <a href="#" class="btn joinBtn">Join</a>
+                    <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">
+                        Join
+                    </button>
+                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+<!--                                <div class="modal-header">-->
+<!--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
+<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                </div>-->
+                                <div class="modal-body">
+                                    Are you sure that you want to join?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-primary">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,41 +184,43 @@
         <button class="addBtn" id="postBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <form action="?command=createPost" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
+                            </div>
+                            <div>
+                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myFile" class="addImgText">Picture for the post:</label>
+                                <input type="file" id="myFile" name="filename">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myDate" class="addImgText">Date:</label>
+                                <input type="date" id="myDate" name="myDate">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myTime" class="addImgText">Time:</label>
+                                <input type="time" id="myTime" name="myTime">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myPar" class="addImgText">Participants needed:</label>
+                                <input type="number" id="myPar" name="myPar" max="100">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+    <!--                        TODO: change color scheme of the btn to match the whole website-->
+                            <button type="button" class="btn joinBtn">Post</button>
+                            <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div>
-                            <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
-                        </div>
-                        <div>
-                            <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
-                        </div>
-                        <div class="addImgBox">
-                            <label for="myFile" class="addImgText">Picture for the post:</label>
-                            <input type="file" id="myFile" name="filename">
-                        </div>
-                        <div class="addImgBox">
-                            <label for="myDate" class="addImgText">Date:</label>
-                            <input type="date" id="myDate" name="myDate">
-                        </div>
-                        <div class="addImgBox">
-                            <label for="myTime" class="addImgText">Time:</label>
-                            <input type="date" id="myTime" name="myTime">
-                        </div>
-                        <div class="addImgBox">
-                            <label for="myPar" class="addImgText">Participants needed:</label>
-                            <input type="number" id="myPar" name="myPar" max="100">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-<!--                        TODO: change color scheme of the btn to match the whole website-->
-                        <button type="button" class="btn joinBtn">Post</button>
-                        <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

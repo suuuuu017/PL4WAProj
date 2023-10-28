@@ -2,13 +2,16 @@
 
 
 class controller {
+    private $input = [];
+
 
     private $input = [];
     public function __construct($input){
         session_start();
+        $this->input = $input;
     }
 
-    public function run($command) {
+    public function run() {
         // Get the command
         $command = "welcome";
         if (isset($this->input["command"]))
@@ -16,21 +19,14 @@ class controller {
 
         switch($command) {
             case "go2Signin":
-                echo "<script>console.log('am here');</script>";
+//                echo "echo hello ";
                 $this->go2Signin();
-                break;
-
-            case "register":
-                register();
-
-            case "validateRegister":
-                validateRegistry();
                 break;
 
             case "showMainPage":
                 include ("mainpage.php");
             default:
-                echo "<script>console.log('shouldnt be here');</script>";
+//                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
                 break;
         }
@@ -45,16 +41,18 @@ class controller {
     }
 
     public function go2Signin() {
+        $alert = "";
         include("./signin.php");
     }
 
-    public function showMainPage() {
+    public function showMainPage($m1 = "") {
 
-        include("./mainPage.php");
+        include("mainPage.php");
     }
 
 
     public function validateRegistry() {
+
 
         $m1 = "";
 
@@ -106,10 +104,9 @@ class controller {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">
             $m1 </div>";
 
-            $this-> register($message); 
-        }
+            $this->showMainPage($message); 
 
-        return;
+        }
     }
 
 
