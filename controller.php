@@ -114,11 +114,19 @@ class controller {
             $par = "No paragraph";
         }
 
-        $content = array([$title, $description, $img, $date, $time, $par]);
+        $content = array();
+        $content[0] = $title;
+        $content[1] = $description;
+        $content[2] = $img;
+        $content[3] = $date;
+        $content[4] = $time;
+        $content[5] = $par;
         echo "<script>console.log('i am getting conent ');</script>";
         $allAdded = $_SESSION["addedPost"];
+        array_push($allAdded, $content);
         $_SESSION["addedPost"] = $allAdded;
         $cardDiv = "";
+//        print_r($_SESSION["addedPost"]);
         if(!empty($_SESSION["addedPost"])) {
             foreach( $_SESSION["addedPost"] as $post) {
                 $cardDiv = $cardDiv . "<div class=\"card postBox CustomCol-4\" >
