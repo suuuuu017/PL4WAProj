@@ -176,6 +176,7 @@
                     </div>
                 </div>
             </div>
+            <?=$cardDiv?>
         </div>
     </main>
 
@@ -199,7 +200,7 @@
                             </div>
                             <div class="addImgBox">
                                 <label for="myFile" class="addImgText">Picture for the post:</label>
-                                <input type="file" id="myFile" name="filename">
+                                <input type="file" id="myFile" name="img">
                             </div>
                             <div class="addImgBox">
                                 <label for="myDate" class="addImgText">Date:</label>
@@ -216,7 +217,7 @@
                         </div>
                         <div class="modal-footer">
     <!--                        TODO: change color scheme of the btn to match the whole website-->
-                            <button type="button" class="btn joinBtn">Post</button>
+                            <button class="btn joinBtn" type="submit" id="postBtn">Post</button>
                             <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
@@ -228,5 +229,20 @@
     </footer>
 </div>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const dataContainer = document.getElementById('data-container');-->
+<!--        const appendButton = document.getElementById('postBtn');-->
+<!--        const newDataInput = document.getElementById('new-data');-->
+<!---->
+<!--        appendButton.addEventListener('click', function () {-->
+<!--            const newDiv = document.createElement('div');-->
+<!--            -->
+<!--            newDiv.textContent = newData;-->
+<!---->
+<!--                -->
+<!--        }-->
+<!---->
+<!--</script>-->
 </body>
 </html>

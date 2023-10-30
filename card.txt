@@ -1,0 +1,23 @@
+<div class=\"card postBox CustomCol-4\" >
+    <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+    <div class=\"card-body\">
+        <h2 class=\"card-title\"><?=$post[0]?></h2>
+        <p class=\"card-text\"><?=$post[1]?></p>
+        <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinModal\">
+            Join
+        </button>
+        <div class=\"modal fade\" id=\"joinModal\" tabindex=\"-1\" aria-labelledby=\"joinModalLabel\" aria-hidden=\"true\">
+            <div class=\"modal-dialog\">
+                <div class=\"modal-content\">
+                    <div class=\"modal-body\">
+                        Are you sure that you want to join?
+                    </div>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
+                        <button type=\"button\" class=\"btn btn-primary\">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

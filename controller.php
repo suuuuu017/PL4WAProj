@@ -6,6 +6,8 @@ class controller {
 
     public function __construct($input){
         session_start();
+
+        $_SESSION["addedPost"] = array();
         $this->input = $input;
     }
 
@@ -26,7 +28,8 @@ class controller {
                 break;
 
             case "showMainPage":
-                include ("mainpage.php");
+                $this->showMainPage();
+                break;
 
             case "verifylogin":
                 $this->verifylogin();
@@ -62,8 +65,7 @@ class controller {
         include("./signin.php");
     }
 
-    public function showMainPage($m1 = "") {
-
+    public function showMainPage($content) {
         include("mainPage.php");
     }
 
@@ -71,7 +73,7 @@ class controller {
         $email = $_POST["email"];
         $password = $_POST["password"];
         $_SESSION["email"] = $email;
-        if(false){
+        if(true){
             //TODO: if the email and password found in database
             $alert = "";
             include("./mainpage.php"); }
@@ -86,6 +88,65 @@ class controller {
 
 
     public function createPost(){
+        $title = $_POST["postName"];
+        $description = $_POST["description"];
+        $img = $_POST["img"];
+        $date = $_POST["myDate"];
+        $time = $_POST["myTime"];
+        $par = $_POST["myPar"];
+
+        if(empty($title)){
+            $title = "No title";
+        }
+        if(empty($description)){
+            $description = "No description";
+        }
+        if(empty($img)){
+            $img = "No image";
+        }
+        if(empty($date)){
+            $date = "No date";
+        }
+        if(empty($time)){
+            $time = "No time";
+        }
+        if(empty($par)){
+            $par = "No paragraph";
+        }
+
+        $content = array([$title, $description, $img, $date, $time, $par]);
+        echo "<script>console.log('i am getting conent ');</script>";
+        $allAdded = $_SESSION["addedPost"];
+        $_SESSION["addedPost"] = $allAdded;
+        $cardDiv = "";
+        if(!empty($_SESSION["addedPost"])) {
+            foreach( $_SESSION["addedPost"] as $post) {
+                $cardDiv = $cardDiv . "<div class=\"card postBox CustomCol-4\" >
+                                        <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                                        <div class=\"card-body\">
+                                            <h2 class=\"card-title\"><?=$post[0]?></h2>
+                                            <p class=\"card-text\"><?=$post[1]?></p>
+                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinModal\">
+                                                Join
+                                            </button>
+                                            <div class=\"modal fade\" id=\"joinModal\" tabindex=\"-1\" aria-labelledby=\"joinModalLabel\" aria-hidden=\"true\">
+                                                <div class=\"modal-dialog\">
+                                                    <div class=\"modal-content\">
+                                                        <div class=\"modal-body\">
+                                                            Are you sure that you want to join?
+                                                        </div>
+                                                        <div class=\"modal-footer\">
+                                                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
+                                                            <button type=\"button\" class=\"btn btn-primary\">Yes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
+            }
+        }
+        include("./mainPage.php");
 
     }
 
