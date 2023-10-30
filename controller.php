@@ -28,6 +28,18 @@ class controller {
             case "showMainPage":
                 include ("mainpage.php");
 
+            case "verifylogin":
+                $this->verifylogin();
+                break;
+
+            case "register":
+                $this->register();
+                break;
+
+            case "createPost":
+                $this->createPost();
+                break;
+
 
             
             default:
@@ -53,6 +65,28 @@ class controller {
     public function showMainPage($m1 = "") {
 
         include("mainPage.php");
+    }
+
+    public function verifylogin(){
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $_SESSION["email"] = $email;
+        if(false){
+            //TODO: if the email and password found in database
+            $alert = "";
+            include("./mainpage.php"); }
+        else{
+            $alert = "<div class=\"alert alert-danger \" role=\"alert\">
+                 You are not registered yet! Please create an account.
+                 </div>";
+            include("./signin.php");
+        }
+
+    }
+
+
+    public function createPost(){
+
     }
 
 
