@@ -64,6 +64,7 @@ class controller {
     }
 
     public function showMainPage($content) {
+        $cardDiv = $_SESSION["cardDiv"];
         include("mainPage.php");
     }
 
@@ -74,6 +75,7 @@ class controller {
         if(true){
             //TODO: if the email and password found in database
             $alert = "";
+            $cardDiv = $_SESSION["cardDiv"];
             include("./mainpage.php"); }
         else{
             $alert = "<div class=\"alert alert-danger \" role=\"alert\">
@@ -124,15 +126,15 @@ class controller {
 //        echo"<br>";
         array_push($allAdded, $content);
         $_SESSION["addedPost"] = $allAdded;
-        $cardDiv = "";
+        $cardDiv = $_SESSION["cardDiv"];
 //        print_r($_SESSION["addedPost"]);
         if(!empty($_SESSION["addedPost"])) {
-            foreach( $_SESSION["addedPost"] as $post) {
+//            foreach( $_SESSION["addedPost"] as $post) {
                 $cardDiv = $cardDiv . "<div class=\"card postBox CustomCol-4\" >
                                         <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
-                                            <h2 class=\"card-title\">$post[0]</h2>
-                                            <p class=\"card-text\">$post[1]</p>
+                                            <h2 class=\"card-title\">$content[0]</h2>
+                                            <p class=\"card-text\">$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinModal\">
                                                 Join
                                             </button>
@@ -151,8 +153,9 @@ class controller {
                                             </div>
                                         </div>
                                     </div>";
-            }
+//            }
         }
+        $_SESSION["cardDiv"] = $cardDiv;
 //        print_r($_SESSION["addedPost"]);
         include("./mainPage.php");
 
