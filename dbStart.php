@@ -11,10 +11,32 @@ $dbHandle = pg_connect("host=$host port=$port dbname=$database user=$user passwo
 
 if ($dbHandle) {
     echo "Success connecting to database";
-} else {
+}
+else{
     echo "An error occurred connecting to the database";
 }
 
+
+//$res = pg_query($dbHandle, "insert into users (name, email, password) values
+//    ('test', 'test', 'test');");
+//if ($res) {
+//    echo "Success writing";
+//} else {
+//    echo "An error occurred writing";
+//}
+
+
+$res = pg_query($dbHandle, "select id, name, email from users;");
+if ($res) {
+    echo "Success reading";
+} else {
+    echo "An error occurred reading";
+}
+
+while ($row = pg_fetch_row($res)) {
+    echo "name: $row[0]  E-mail: $row[1] id: $row[2]";
+    echo "<br />\n";
+}
 
 //$res  = pg_query($dbHandle, "create sequence user_seq;");
 
@@ -38,4 +60,18 @@ if ($dbHandle) {
 //            parNum int,
 //            postTime TIMESTAMP,
 //            currenPar int);");
+
+//$res = pg_prepare($dbHandle, "myinsert", "insert into users (name, email, password) values
+//    ($1, $2, $3);");
+//
+//$res = pg_execute($dbHandle, "myinsert", ["test", "test@test.com", "test"]);
+//
+//if ($res) {
+//    echo "Success adding";
+//} else {
+//    echo "An error occurred ";
+//}
+
+
+
 
