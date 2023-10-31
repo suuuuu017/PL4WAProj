@@ -16,4 +16,26 @@ if ($dbHandle) {
 }
 
 
+//$res  = pg_query($dbHandle, "create sequence user_seq;");
+
+// Create tablse
+
+//$res  = pg_query($dbHandle, "create table users (
+//            id  int primary key default nextval('user_seq'),
+//            name text,
+//            email text,
+//            password text);");
+
+//$res  = pg_query($dbHandle, "create sequence post_seq;");
+//
+//$res  = pg_query($dbHandle, "create table posts (
+//            id  int primary key default nextval('post_seq'),
+//            title text,
+//            description text,
+//            pic text,
+//            date DATE,
+//            time TIME,
+//            parNum int,
+//            postTime TIMESTAMP,
+//            currenPar int);");
 
