@@ -6,8 +6,6 @@ class controller {
 
     public function __construct($input){
         session_start();
-
-        $_SESSION["addedPost"] = array();
         $this->input = $input;
     }
 
@@ -121,8 +119,9 @@ class controller {
         $content[3] = $date;
         $content[4] = $time;
         $content[5] = $par;
-        echo "<script>console.log('i am getting conent ');</script>";
         $allAdded = $_SESSION["addedPost"];
+//        print_r($_SESSION["addedPost"]);
+//        echo"<br>";
         array_push($allAdded, $content);
         $_SESSION["addedPost"] = $allAdded;
         $cardDiv = "";
@@ -132,8 +131,8 @@ class controller {
                 $cardDiv = $cardDiv . "<div class=\"card postBox CustomCol-4\" >
                                         <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
-                                            <h2 class=\"card-title\"><?=$post[0]?></h2>
-                                            <p class=\"card-text\"><?=$post[1]?></p>
+                                            <h2 class=\"card-title\">$post[0]</h2>
+                                            <p class=\"card-text\">$post[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinModal\">
                                                 Join
                                             </button>
@@ -154,6 +153,7 @@ class controller {
                                     </div>";
             }
         }
+//        print_r($_SESSION["addedPost"]);
         include("./mainPage.php");
 
     }
