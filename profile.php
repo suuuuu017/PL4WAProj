@@ -123,7 +123,7 @@
           <h1 class="float-md-start mb-0">HoosHiking</h1>
           <nav class="nav nav-masthead justify-content-center float-md-end ">
             <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="mainpage.php">Home</a>
-            <a class="nav-link fw-bold py-1 px-0 active" href="pro.html">Profile</a>
+            <a class="nav-link fw-bold py-1 px-0 active" href="profile.php">Profile</a>
             <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
           </nav>
     </div>
@@ -136,7 +136,32 @@
             <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
           </div>
           
-          <h2 class="name">Jane Abet</h2>
+          <h2 class="name">Jane Abet <?$_SESSION['userName'] ?> </h2>
+
+          <form action="?command=editProfile" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input class="postNameBox" type="text" name="userName" placeholder="Enter your Name" required>
+                        </div>
+                        <div>
+                            <input class="descriptionBox" type="textarea" name="description" placeholder="Write a Description">
+                        </div>
+                        <div class="addImgBox">
+                            <label for="myImage" class="addImgText">Upload a new Profile Photo:</label>
+                            <input type="file" id="myImage" name="profileImage">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+<!--                        TODO: change color scheme of the btn to match the whole website-->
+                        <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </div>
+         </form>
 
           <div class="row">
             <div class="col-1">
@@ -145,7 +170,10 @@
               <img class="social" src="assets/images/twitter.png" alt="twitter">
             </div>
           <div class="col-11 description">
-            <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>           
+            <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
+          
+            <p> <? $_SESSION['description'] ?> </p>
+
           </div>
 
           </div>

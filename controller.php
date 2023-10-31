@@ -15,20 +15,29 @@ class controller {
         if (isset($this->input["command"]))
             $command = $this->input["command"];
 
+
         switch($command) {
             case "go2Signin":
 //                echo "echo hello ";
                 $this->go2Signin();
                 break;
 
-            case "validateRegister":
-                validateRegistry();
+            case "ValidateRegister":
+                $this->validateRegistry();
+                break;
+
+            case "register":
+                $this->register();
                 break;
 
             case "showMainPage":
                 include ("mainpage.php");
-
-
+                break;
+            
+            case "editProfile":
+                $this->editProfile();
+                echo "hello";
+                break;
             
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
@@ -37,7 +46,7 @@ class controller {
         }
     }
 
-    public function register($message) {
+    public function register($message = "") {
         include ("register.php");
     }
 
@@ -58,13 +67,14 @@ class controller {
 
     public function validateRegistry() {
 
-
+       
         $m1 = "";
 
-        if (isset($_POST['email'])) {
+        if ($_POST['email'] != "") {
 
-            if (!is_uva_email($_POST['email'])) {
+            if ($this->is_uva_email($_POST['email']) !== 1) {
                 $m1 .= "The email is not a valid uva email, make sure the domain is @virginia.edu <br>";
+            
             }
 
         }
@@ -75,12 +85,12 @@ class controller {
 
 
 
-        if (!isset($_POST['username'])) {
+        if ($_POST['username'] == "") {
 
-            $m1 .= "No username address was provided <br>";
+            $m1 .= "No username was provided <br>";
         }
 
-        if (isset($_POST['password1']) && isset($_POST['password2'])) {
+        if ($_POST['password1'] != "" && $_POST['password2'] != "") {
 
             if ($_POST['password1'] !== $_POST['password2']) {
                 $m1 .= "Your passwords didn't match<br>";
@@ -88,20 +98,19 @@ class controller {
 
             else {
 
-                if (!verifyPassword($_POST['password1'])) {
+                if (!$this->verifyPassword($_POST['password1'])) {
                     $m1 .= "Your password didn't contain at Minimum eight characters, at least one letter, one number and one special character <br>";
                 }
             }
         }
 
         else {
-            $m1 .= "You didn't enter your password twice<br>";
+            $m1 .= "You didn't enter your password at twice<br>";
         }
 
         if ( $m1 === "") {
              // SAVE ALL OF THE CONTENT
              $this->showMainPage();
-             return;
         }
 
         else {
@@ -109,7 +118,7 @@ class controller {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">
             $m1 </div>";
 
-            $this->showMainPage($message); 
+            $this->register($message); 
 
         }
     }
@@ -136,6 +145,12 @@ class controller {
     
         return false;
     
+    }
+
+
+    public function editProfile() {
+        $_SESSION['userName'] = $_POST['userName'];
+        $_SESSION['description'] = $_POST['description'];
     }
 
 
