@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head><script src="./assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -122,12 +122,12 @@
         <div>
           <h1 class="float-md-start mb-0">HoosHiking</h1>
           <nav class="nav nav-masthead justify-content-center float-md-end ">
-            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="mainpage.php">Home</a>
-            <a class="nav-link fw-bold py-1 px-0 active" href="profile.php">Profile</a>
+            <a type="submit" class="nav-link fw-bold py-1 px-0" aria-current="page" href="?command=showMainPage">Home</a>
+            <a type="submit" class="nav-link fw-bold py-1 px-0 active" href="?command=showProfile">Profile</a>
             <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
           </nav>
-    </div>
-  </header>
+        </div>
+      </header>
 
     <section class="py-5 text-center container">
       <div class="row py-lg-5">
@@ -136,9 +136,15 @@
             <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
           </div>
           
-          <h2 class="name">Jane Abet <?$_SESSION['userName'] ?> </h2>
+          <h2 class="name"> <?= $_SESSION['userName'] ?> </h2>
 
-          <form action="?command=editProfile" method="post">
+    <!-- start of edit modal -->
+    <div>
+      <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</button>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <form action="?command=showProfile" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
@@ -146,22 +152,27 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <input class="postNameBox" type="text" name="userName" placeholder="Enter your Name" required>
+                          <label style="color: black" for="userName">Your name or Username:</label>
+                            <input style="color: black" class="postNameBox" type="text" name="userName" placeholder="Enter your Name" required>
                         </div>
                         <div>
-                            <input class="descriptionBox" type="textarea" name="description" placeholder="Write a Description">
+                          <label style="color: black" for="description">About You:</label>
+                            <textarea id="description" name="description" rows="4" cols="50"></textarea>
                         </div>
                         <div class="addImgBox">
-                            <label for="myImage" class="addImgText">Upload a new Profile Photo:</label>
+                            <label style="color: black" for="myImage" class="addImgText">Upload a new Profile Photo:</label>
                             <input type="file" id="myImage" name="profileImage">
                         </div>
                     </div>
                     <div class="modal-footer">
-<!--                        TODO: change color scheme of the btn to match the whole website-->
                         <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
                     </div>
                 </div>
          </form>
+          </div>
+        </div>
+      </div>
+      <!-- end of edit modal -->
 
           <div class="row">
             <div class="col-1">
@@ -169,15 +180,16 @@
               <img class="social" src="assets/images/facebook.png" alt="facebook">
               <img class="social" src="assets/images/twitter.png" alt="twitter">
             </div>
-          <div class="col-11 description">
+          
+            <div class="col-11 description">
             <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
           
-            <p> <? $_SESSION['description'] ?> </p>
+            <p> <?= $_SESSION['description'] ?> </p>
+
+            </div>
 
           </div>
-
-          </div>
-          </div>
+        </div>
       </div>
     </section>
 
@@ -189,41 +201,84 @@
               <a class="btn joinBtn" href="#">Active Post</a>
               <a class="btn joinBtn" href="#">Past Post</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link" href="#">Link</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link disabled" aria-disabled="true">Disabled</a>-->
-<!--            </li>-->
           </ul>
         </div>
         <div class="card-body">
           <div>
-            <div class="card postBox CustomCol-4">
-              <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-              <div class="card-body">
-                <h3 class="card-title">Hike</h3>
-                <p class="card-text">Some description of the hike.</p>
-                <a href="#" class="btn joinBtn">Edit</a>
-                <a href="#"  class="btn joinBtn">Delete</a>
-              </div>
-            </div>
-            <div class="card postBox CustomCol-4" >
-              <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-              <div class="card-body">
-                <h3 class="card-title"> Hike </h3>
-                <p class="card-text"> Some description of the hike.</p>
-                <a href="#" class="btn joinBtn">Edit</a>
-                <a href="#" class="btn joinBtn">Delete</a>
-              </div>
-            </div>
             <div class="card postBox CustomCol-4" >
               <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
               <div class="card-body">
                 <h3 class="card-title">Hike</h3>
                 <p class="card-text">Some description of the hike.</p>
-                <a href="#" class="btn joinBtn">Edit</a>
-                <a href="#" class="btn joinBtn">Delete</a>
+                    <!-- start of edit modal -->
+                <div>
+                  <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit Post</button>
+    
+                  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                  <form action="?command=editPost" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editPostModalLabel">Edit Post</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
+                            </div>
+                            <div>
+                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myFile" class="addImgText">Picture for the post:</label>
+                                <input type="file" id="myFile" name="img">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myDate" class="addImgText">Date:</label>
+                                <input type="date" id="myDate" name="myDate">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myTime" class="addImgText">Time:</label>
+                                <input type="time" id="myTime" name="myTime">
+                            </div>
+                            <div class="addImgBox">
+                                <label for="myPar" class="addImgText">Participants needed:</label>
+                                <input type="number" id="myPar" name="myPar" max="100">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+    <!--                        TODO: change color scheme of the btn to match the whole website-->
+                            <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Change</button>
+                        </div>
+                      </div>
+                  </form>
+          </div>
+        </div>
+      </div>
+      <!-- end of edit post modal -->
+
+      <!-- start of delete modal -->
+      <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">
+                        Delete
+                    </button>
+                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+<!--                                <div class="modal-header">-->
+<!--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
+<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                </div>-->
+                                <div style= "color: black" class="modal-body">
+                                    Are you sure that you want to delete?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
+      <!-- end of delete modal -->
               </div>
             </div>
           </div>
@@ -258,6 +313,6 @@
 </div>
 
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
