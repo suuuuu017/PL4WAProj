@@ -244,6 +244,9 @@ class controller {
         $this->db->query("insert into posts (title, description, pic, date, time, parNum, postTime, currenPar) 
                             values ($1, $2, $3, $4, $5, $6, $7, $8);",
                     $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
+        $this->db->query("insert into userpost (email, title) 
+                            values ($1, $2);",
+                            $_SESSION["email"], $title);
         if(key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])){
             $allAdded = array();
         }
