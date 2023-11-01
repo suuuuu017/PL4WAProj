@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head><script src="./assets/js/color-modes.js"></script>
     
 <!--    app url: https://cs4640.cs.virginia.edu/qvw9pv/proj/index.html-->
 <!--    app url: https://cs4640.cs.virginia.edu/rjg8bkr/proj/index.html-->
@@ -150,7 +150,7 @@
     </footer>
   </div>
 
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- java script that redirects to the sign in page from the index page -->
 <!--<script>-->

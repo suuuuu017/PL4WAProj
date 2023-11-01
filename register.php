@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
-<head><script src="../assets/js/color-modes.js"></script>
+<head><script src="./assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -184,7 +184,7 @@
     <footer class="mt-auto text-white-50">
     </footer>
 </div>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 </script>
 </body>
