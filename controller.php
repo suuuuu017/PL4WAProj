@@ -43,9 +43,8 @@ class controller {
                 $this->createPost();
                 break;
 
-            case "editProfile":
+            case "showProfile":
                 $this->editProfile();
-                echo "hello";
                 break;
 
             default:
@@ -68,8 +67,11 @@ class controller {
         include("./signin.php");
     }
 
-    public function showMainPage($content) {
+    public function showMainPage($content="") {
+
+        // if(isset($_SESSION["cardDiv"])) {
         $cardDiv = $_SESSION["cardDiv"];
+        // }
         include("mainPage.php");
     }
 
@@ -277,8 +279,12 @@ class controller {
 
 
     public function editProfile() {
-        $_SESSION['userName'] = $_POST['userName'];
-        $_SESSION['description'] = $_POST['description'];
+        // if(isset($_POST['userName']) && isset($_POST['description'])) {
+            $_SESSION['userName'] = $_POST['userName'];
+            $_SESSION['description'] = $_POST['description'];
+        // }
+
+        include ('profile.php');
     }
 
 
