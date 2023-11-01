@@ -17,8 +17,8 @@ else{
 }
 
 
-$res = pg_query($dbHandle, "insert into users (name, email, password) values
-        ('test', 'test@test.com', 'test');");
+//$res = pg_query($dbHandle, "insert into users (name, email, password) values
+//        ('test', 'test@test.com', 'test');");
 //if ($res) {
 //    echo "Success writing";
 //} else {
@@ -26,7 +26,7 @@ $res = pg_query($dbHandle, "insert into users (name, email, password) values
 //}
 
 
-$res = pg_query($dbHandle, "select * from users where name='test';");
+$res = pg_query($dbHandle, "select * from posts where title='test';");
 if ($res) {
     echo "Success reading";
 } else {
@@ -41,7 +41,7 @@ if(empty($res)){
 
 while ($row = pg_fetch_row($res)) {
     echo "<br />\n";
-    echo "name: $row[0]  E-mail: $row[1] id: $row[2]";
+    echo "$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7]";
     echo "<br />\n";
 }
 
