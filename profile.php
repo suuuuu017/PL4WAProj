@@ -136,7 +136,7 @@
             <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
           </div>
           
-          <h2 class="name"> <?= $_SESSION['userName'] ?> </h2>
+          <h2 class="name"><?=$name?></h2>
 
     <!-- start of edit modal -->
     <div>
@@ -144,7 +144,7 @@
     
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-      <form action="?command=showProfile" method="post">
+      <form action="?command=editProfile" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
@@ -184,7 +184,7 @@
             <div class="col-11 description">
             <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
           
-            <p> <?= $_SESSION['description'] ?> </p>
+            <p><?=$description?></p>
 
             </div>
 

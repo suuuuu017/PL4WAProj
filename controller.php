@@ -44,6 +44,10 @@ class controller {
                 break;
 
             case "showProfile":
+                $this->showProfile();
+                break;
+
+            case "editProfile":
                 $this->editProfile();
                 break;
 
@@ -62,6 +66,13 @@ class controller {
         }
     }
 
+    public function showProfile(){
+        $email = $_SESSION["email"];
+        $res = $this->db->query("select * from users where email = $1;", $email);
+        $name = $res[0]["name"];
+        $description = $res[0]["description"];
+        include("profile.php");
+    }
     public function register($message = "") {
         include ("register.php");
     }
@@ -148,6 +159,7 @@ class controller {
     public function verifylogin(){
         $email = $_POST["email"];
         $password = $_POST["password"];
+        $_SESSION["userName"] = $email;
         $_SESSION["email"] = $email;
         $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
         if(!empty($res)){
@@ -348,10 +360,15 @@ class controller {
 
     public function editProfile() {
         // if(isset($_POST['userName']) && isset($_POST['description'])) {
-            $_SESSION['userName'] = $_POST['userName'];
-            $_SESSION['description'] = $_POST['description'];
+//            $_SESSION['userName'] = $_POST['userName'];
+//            $_SESSION['description'] = $_POST['description'];
         // }
-        include ('profile.php');
+        $email = $_SESSION["email"];
+        $newName = $_POST["userName"];
+        $newDes = $_POST["description"];
+        //TODO: update profile photo too
+        $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
+        $this->showProfile();
     }
 
 
