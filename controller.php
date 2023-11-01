@@ -59,6 +59,10 @@ class controller {
                 $this->logout();
                 break;
 
+            case "editPost":
+                $this->editPost();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -66,11 +70,89 @@ class controller {
         }
     }
 
+
+    public function attachtoprofileDiv($pd="", $t="", $d=""){
+        $profileDiv = $pd. "<div class=\"card postBox CustomCol-4\" >
+					<img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                      <div class=\"card-body\">
+                        <h3 class=\"card-title\">$t</h3>
+                        <p class=\"card-text\">$d</p>
+                            <!-- start of edit modal -->
+                        <div>
+                          <button class=\"btn joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#editPostModal\">Edit Post</button>
+                          <div class=\"modal fade\" id=\"editPostModal\" tabindex=\"-1\" aria-labelledby=\"editPostModalLabel\" aria-hidden=\"true\">
+                              <div class=\"modal-dialog\">
+                                  <form action=\"?command=editPost\" method=\"post\">
+                                    <div class=\"modal-content\">
+                                        <div class=\"modal-header\">
+                                            <h1 class=\"modal-title fs-5\" id=\"editPostModalLabel\">Edit Post</h1>
+                                            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
+                                        </div>
+                                        <div class=\"modal-body\">
+                                            <div>
+                                                <input class=\"postNameBox\" type=\"text\" name=\"postName\" placeholder=\"New Adventure\" required>
+                                            </div>
+                                            <div>
+                                                <input class=\"descriptionBox\" type=\"text\" name=\"description\" placeholder=\"Description\" required>
+                                            </div>
+                                            <div class=\"addImgBox\">
+                                                <label for=\"myFile\" class=\"addImgText\">Picture for the post:</label>
+                                                <input type=\"file\" id=\"myFile\" name=\"img\">
+                                            </div>
+                                            <div class=\"addImgBox\">
+                                                <label for=\"myDate\" class=\"addImgText\">Date:</label>
+                                                <input type=\"date\" id=\"myDate\" name=\"myDate\">
+                                            </div>
+                                            <div class=\"addImgBox\">
+                                                <label for=\"myTime\" class=\"addImgText\">Time:</label>
+                                                <input type=\"time\" id=\"myTime\" name=\"myTime\">
+                                            </div>
+                                            <div class=\"addImgBox\">
+                                                <label for=\"myPar\" class=\"addImgText\">Participants needed:</label>
+                                                <input type=\"number\" id=\"myPar\" name=\"myPar\" max=\"100\">
+                                            </div>
+                                        </div>
+                                        <div class=\"modal-footer\">
+                    <!--                        TODO: change color scheme of the btn to match the whole website-->
+                                            <button type=\"submit\" class=\"btn joinBtn\" data-bs-dismiss=\"modal\">Change</button>
+                                        </div>
+                                    </div>
+                                  </form>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+				</div>";
+        return $profileDiv;
+    }
+    public function showUserPost(){
+        $res= $this->db->query("select * from userpost where email = $1;", $_SESSION["email"]);
+        $profileshow = "";
+        foreach($res as $t){
+            $title = $t["title"];
+            $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
+            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des);
+        }
+        return $profileshow;
+    }
+
+    public function editPost(){
+
+    }
+
+
     public function showProfile(){
         $email = $_SESSION["email"];
         $res = $this->db->query("select * from users where email = $1;", $email);
-        $name = $res[0]["name"];
-        $description = $res[0]["description"];
+        $name="";
+        if(key_exists("name", $res[0])){
+            $name = $name = $res[0]["name"];
+        }
+        $description = "";
+        if(key_exists("description", $res[0])){
+            $description = $res[0]["description"];
+        }
+        $profileDiv = $this->showUserPost();
         include("profile.php");
     }
     public function register($message = "") {
@@ -341,6 +423,7 @@ class controller {
             $m1 </div>";
             $this->register($message);
         }
+        $_SESSION["email"] = $_POST['email'];
     }
 
 

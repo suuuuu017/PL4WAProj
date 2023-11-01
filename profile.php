@@ -203,87 +203,91 @@
             </li>
           </ul>
         </div>
-        <div class="card-body">
-          <div>
-            <div class="card postBox CustomCol-4" >
-              <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-              <div class="card-body">
-                <h3 class="card-title">Hike</h3>
-                <p class="card-text">Some description of the hike.</p>
-                    <!-- start of edit modal -->
-                <div>
-                  <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit Post</button>
-    
-                  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                  <form action="?command=editPost" method="post">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="editPostModalLabel">Edit Post</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
-                            </div>
-                            <div>
-                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
-                            </div>
-                            <div class="addImgBox">
-                                <label for="myFile" class="addImgText">Picture for the post:</label>
-                                <input type="file" id="myFile" name="img">
-                            </div>
-                            <div class="addImgBox">
-                                <label for="myDate" class="addImgText">Date:</label>
-                                <input type="date" id="myDate" name="myDate">
-                            </div>
-                            <div class="addImgBox">
-                                <label for="myTime" class="addImgText">Time:</label>
-                                <input type="time" id="myTime" name="myTime">
-                            </div>
-                            <div class="addImgBox">
-                                <label for="myPar" class="addImgText">Participants needed:</label>
-                                <input type="number" id="myPar" name="myPar" max="100">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-    <!--                        TODO: change color scheme of the btn to match the whole website-->
-                            <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Change</button>
-                        </div>
-                      </div>
-                  </form>
-          </div>
-        </div>
-      </div>
+		<div class="card-body">
+			<div>
+                <?=$profileDiv?>
+<!--				<div class="card postBox CustomCol-4" >-->
+<!--					<img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
+<!--                      <div class="card-body">-->
+<!--                        <h3 class="card-title">Hike</h3>-->
+<!--                        <p class="card-text">Some description of the hike.</p>-->
+<!--                             start of edit modal -->
+<!--                        <div>-->
+<!--                          <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit Post</button>-->
+<!--                          <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">-->
+<!--                              <div class="modal-dialog">-->
+<!--                                  <form action="?command=editPost" method="post">-->
+<!--                                    <div class="modal-content">-->
+<!--                                        <div class="modal-header">-->
+<!--                                            <h1 class="modal-title fs-5" id="editPostModalLabel">Edit Post</h1>-->
+<!--                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                        </div>-->
+<!--                                        <div class="modal-body">-->
+<!--                                            <div>-->
+<!--                                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>-->
+<!--                                            </div>-->
+<!--                                            <div class="addImgBox">-->
+<!--                                                <label for="myFile" class="addImgText">Picture for the post:</label>-->
+<!--                                                <input type="file" id="myFile" name="img">-->
+<!--                                            </div>-->
+<!--                                            <div class="addImgBox">-->
+<!--                                                <label for="myDate" class="addImgText">Date:</label>-->
+<!--                                                <input type="date" id="myDate" name="myDate">-->
+<!--                                            </div>-->
+<!--                                            <div class="addImgBox">-->
+<!--                                                <label for="myTime" class="addImgText">Time:</label>-->
+<!--                                                <input type="time" id="myTime" name="myTime">-->
+<!--                                            </div>-->
+<!--                                            <div class="addImgBox">-->
+<!--                                                <label for="myPar" class="addImgText">Participants needed:</label>-->
+<!--                                                <input type="number" id="myPar" name="myPar" max="100">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="modal-footer">-->
+<!--                    <!--                        TODO: change color scheme of the btn to match the whole website-->
+<!--                                            <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Change</button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                  </form>-->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--				</div>-->
+			</div>
+		</div>
       <!-- end of edit post modal -->
 
       <!-- start of delete modal -->
-      <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">
-                        Delete
-                    </button>
-                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+<!--      <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">-->
+<!--                        Delete-->
+<!--                    </button>-->
+<!--                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">-->
+<!--                        <div class="modal-dialog">-->
+<!--                            <div class="modal-content">-->
 <!--                                <div class="modal-header">-->
 <!--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
 <!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
 <!--                                </div>-->
-                                <div style= "color: black" class="modal-body">
-                                    Are you sure that you want to delete?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-primary">Yes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>      
-      <!-- end of delete modal -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--                                <div style= "color: black" class="modal-body">-->
+<!--                                    Are you sure that you want to delete?-->
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
+<!--                                    <button type="submit" class="btn btn-primary">Yes</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>      -->
+<!--      end of delete modal -->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
     </main>
 <!--    <div class="album py-5 bg-body-tertiary">-->
