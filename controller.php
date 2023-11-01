@@ -71,11 +71,12 @@ class controller {
         include("./signin.php");
     }
 
-    public function showMainPage($content="") {
+    public function showMainPage($msg="") {
 
         // if(isset($_SESSION["cardDiv"])) {
         $cardDiv = $_SESSION["cardDiv"];
         // }
+        $message = $msg;
         include("mainPage.php");
     }
 
@@ -116,24 +117,35 @@ class controller {
         $date = $_POST["myDate"];
         $time = $_POST["myTime"];
         $par = $_POST["myPar"];
+        $msg = "";
 
         if(empty($title)){
-            $title = "No title";
+            $msg = "No title";
         }
         if(empty($description)){
-            $description = "No description";
+            $msg = "No description";
         }
         if(empty($img)){
-            $img = "No image";
+            $msg = "No image";
         }
         if(empty($date)){
-            $date = "No date";
+            $msg = "No date";
         }
         if(empty($time)){
-            $time = "No time";
+            $msg = "No time";
         }
         if(empty($par)){
-            $par = "No paragraph";
+            $msg = "No participants number";
+        }
+
+
+        if(!empty($msg)){
+            //TODO; need to leave upper margin
+            $message = "<div class=\"alert alert-danger \" role=\"alert\">
+                 $msg  
+                 </div>";
+            $this->showMainPage($message);
+            return;
         }
 
         //TODO: need to verify input
@@ -198,22 +210,22 @@ class controller {
         }
         $_SESSION["cardDiv"] = $cardDiv;
 //        print_r($_SESSION["addedPost"]);
-        include("./mainPage.php");
+        $this->showMainPage();
 
     }
 
     public function join() {
-        print_r($_POST);
+//        print_r($_POST);
         if(!empty($_POST["joinedTitle"])) {
             $joinTitle = $_POST["joinedTitle"];
-            echo $joinTitle;
+//            echo $joinTitle;
         }
         if(!empty($_POST["joinedTitle"])) {
             $res = $this->db->query("select * from posts where title = $1;", $joinTitle);
             if (!empty($res)) {
                 $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
                 if ($tmpPar >= 1) {
-                    echo $tmpPar;
+//                    echo $tmpPar;
                     $tmpPar = $tmpPar - 1;
                     $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
                 } else {

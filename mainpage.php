@@ -133,6 +133,9 @@
 <!--TODO: the card is tilted to the left not in the middle need fixing-->
     <main class="px-3">
         <div>
+            <?=$message?>
+        </div>
+        <div>
 <!--            <form action="?command=join" method="post">-->
 <!--                <div class="card postBox CustomCol-4" >-->
 <!--                    <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
@@ -188,19 +191,19 @@
                             </div>
                             <div class="addImgBox">
                                 <label for="myFile" class="addImgText">Picture for the post:</label>
-                                <input type="file" id="myFile" name="img">
+                                <input type="file" id="myFile" name="img" required>
                             </div>
                             <div class="addImgBox">
                                 <label for="myDate" class="addImgText">Date:</label>
-                                <input type="date" id="myDate" name="myDate">
+                                <input type="date" id="myDate" name="myDate" required>
                             </div>
                             <div class="addImgBox">
                                 <label for="myTime" class="addImgText">Time:</label>
-                                <input type="time" id="myTime" name="myTime">
+                                <input type="time" id="myTime" name="myTime" required>
                             </div>
                             <div class="addImgBox">
                                 <label for="myPar" class="addImgText">Participants needed:</label>
-                                <input type="number" id="myPar" name="myPar" max="100">
+                                <input type="number" id="myPar" name="myPar" max="100" required>
                             </div>
                         </div>
                         <div class="modal-footer">
