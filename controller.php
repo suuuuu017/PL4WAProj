@@ -3,10 +3,12 @@
 
 class controller {
     private $input = [];
+    private $db;
 
     public function __construct($input){
         session_start();
         $this->input = $input;
+        $this->db = new Database();
     }
 
     public function run() {
@@ -75,11 +77,22 @@ class controller {
         $email = $_POST["email"];
         $password = $_POST["password"];
         $_SESSION["email"] = $email;
-        if(true){
-            //TODO: if the email and password found in database
-            $alert = "";
-            $cardDiv = $_SESSION["cardDiv"];
-            include("./mainpage.php"); }
+        $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
+        if(!empty($res)){
+            $res = $this->db->query("select * from users where password = $1;", $_POST["password"]);
+            if(!empty($res)) {
+                //TODO: if the email and password found in database
+                $alert = "";
+                $cardDiv = $_SESSION["cardDiv"];
+                include("./mainpage.php");
+            }
+            else{
+                $alert = "<div class=\"alert alert-danger \" role=\"alert\">
+                 Wrong password! Please try again.
+                 </div>";
+                include("./signin.php");
+            }
+        }
         else{
             $alert = "<div class=\"alert alert-danger \" role=\"alert\">
                  You are not registered yet! Please create an account.
@@ -124,12 +137,22 @@ class controller {
         $content[3] = $date;
         $content[4] = $time;
         $content[5] = $par;
-        $allAdded = $_SESSION["addedPost"];
+        if(key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])){
+            $allAdded = array();
+        }
+        else{
+            $allAdded = $_SESSION["addedPost"];
+        }
 //        print_r($_SESSION["addedPost"]);
 //        echo"<br>";
         array_push($allAdded, $content);
         $_SESSION["addedPost"] = $allAdded;
-        $cardDiv = $_SESSION["cardDiv"];
+        if(key_exists("cardDiv", $_SESSION) == false){
+            $cardDiv = "";
+        }
+        else {
+            $cardDiv = $_SESSION["cardDiv"];
+        }
 //        print_r($_SESSION["addedPost"]);
         if(!empty($_SESSION["addedPost"])) {
 //            foreach( $_SESSION["addedPost"] as $post) {

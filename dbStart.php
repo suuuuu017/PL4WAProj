@@ -17,8 +17,8 @@ else{
 }
 
 
-//$res = pg_query($dbHandle, "insert into users (name, email, password) values
-//    ('test', 'test', 'test');");
+$res = pg_query($dbHandle, "insert into users (name, email, password) values
+        ('test', 'test@test.com', 'test');");
 //if ($res) {
 //    echo "Success writing";
 //} else {
@@ -26,14 +26,21 @@ else{
 //}
 
 
-$res = pg_query($dbHandle, "select id, name, email from users;");
+$res = pg_query($dbHandle, "select * from users where name='test';");
 if ($res) {
     echo "Success reading";
 } else {
     echo "An error occurred reading";
 }
 
+//$res = pg_fetch_all($res);
+
+if(empty($res)){
+    echo "not found";
+}
+
 while ($row = pg_fetch_row($res)) {
+    echo "<br />\n";
     echo "name: $row[0]  E-mail: $row[1] id: $row[2]";
     echo "<br />\n";
 }
