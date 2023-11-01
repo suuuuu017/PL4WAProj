@@ -51,6 +51,10 @@ class controller {
                 $this->join();
                 break;
 
+            case "logout":
+                $this->logout();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -70,12 +74,73 @@ class controller {
         $alert = "";
         include("./signin.php");
     }
+    public function logout(){
+        session_destroy();
+        $this->showWelcome();
+    }
+
+    public function loadPostfromdb(){
+        $cardDiv = "";
+        $res = $this->db->query("select * from posts;");
+        foreach($res as $r){
+            $content = array();
+            $content[0] = $r["title"];
+            $content[1] = $r["description"];
+            $content[2] = $r["pic"];
+            $content[3] = $r["date"];
+            $content[4] = $r["time"];
+            $content[5] = $r["parnum"];
+            $content[6] = $r["posttime"];
+            $content[7] = $r["currenpar"];
+            $cardDiv = $this->attach2cardiv($content, $cardDiv);
+        }
+//        if(key_exists("cardDiv", $_SESSION) == true){
+//            $cardDiv = $_SESSION["cardDiv"].$cardDiv;
+//        }
+        return $cardDiv;
+    }
+    public function attach2cardiv($content, $cardDiv){
+        $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
+                                    <div class=\"card postBox CustomCol-4\" >
+                                        <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                                        <div class=\"card-body\">
+                                            <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
+                                            <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
+                                            <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
+                                            <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
+                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinformModal\">
+                                                Join
+                                            </button>
+                                            <div class=\"modal fade\" id=\"joinformModal\" tabindex=\"-1\" aria-labelledby=\"joinformModalLabel\" aria-hidden=\"true\">
+                                                <div class=\"modal-dialog\">
+                                                    <div class=\"modal-content\">
+                                                        <div class=\"modal-body\">
+                                                            Are you sure that you want to join?
+                                                        </div>
+                                                        <div class=\"modal-footer\">
+                                                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
+                                                            <button type=\"submit\" class=\"btn btn-primary\" name=\"join\" value=\"true\">Yes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </form>";
+        return $cardDiv;
+    }
 
     public function showMainPage($msg="") {
-
+        $cardDiv = "";
         // if(isset($_SESSION["cardDiv"])) {
-        $cardDiv = $_SESSION["cardDiv"];
+//        if(key_exists("cardDiv", $_SESSION) == false){
+//            $cardDiv = "";
+//        }
+//        else{
+//            $cardDiv = $_SESSION["cardDiv"];
+//        }
         // }
+        $cardDiv = $this->loadPostfromdb();
         $message = $msg;
         include("mainPage.php");
     }
@@ -90,8 +155,15 @@ class controller {
             if(!empty($res)) {
                 //TODO: if the email and password found in database
                 $alert = "";
-                $cardDiv = $_SESSION["cardDiv"];
-                include("./mainpage.php");
+                $cardDiv = "";
+                // if(isset($_SESSION["cardDiv"])) {
+                if(key_exists("cardDiv", $_SESSION) == false){
+                    $cardDiv = "";
+                }
+                else{
+                    $cardDiv = $_SESSION["cardDiv"];
+                }
+                $this->showMainPage();
             }
             else{
                 $alert = "<div class=\"alert alert-danger \" role=\"alert\">
@@ -179,33 +251,7 @@ class controller {
 //        print_r($_SESSION["addedPost"]);
         if(!empty($_SESSION["addedPost"])) {
 //            foreach( $_SESSION["addedPost"] as $post) {
-                $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
-                                            <div class=\"card postBox CustomCol-4\" >
-                                                <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
-                                                <div class=\"card-body\">
-                                                    <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
-                                                    <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
-                                                    <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
-                                                    <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
-                                                    <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinformModal\">
-                                                        Join
-                                                    </button>
-                                                    <div class=\"modal fade\" id=\"joinformModal\" tabindex=\"-1\" aria-labelledby=\"joinformModalLabel\" aria-hidden=\"true\">
-                                                        <div class=\"modal-dialog\">
-                                                            <div class=\"modal-content\">
-                                                                <div class=\"modal-body\">
-                                                                    Are you sure that you want to join?
-                                                                </div>
-                                                                <div class=\"modal-footer\">
-                                                                    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
-                                                                    <button type=\"submit\" class=\"btn btn-primary\" name=\"join\" value=\"true\">Yes</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                         </form>";
+               $cardDiv = $this->attach2cardiv($content, $cardDiv);
 //            }
         }
         $_SESSION["cardDiv"] = $cardDiv;
