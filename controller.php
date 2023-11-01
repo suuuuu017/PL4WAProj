@@ -47,6 +47,10 @@ class controller {
                 $this->editProfile();
                 break;
 
+            case "join":
+                $this->join();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -163,34 +167,61 @@ class controller {
 //        print_r($_SESSION["addedPost"]);
         if(!empty($_SESSION["addedPost"])) {
 //            foreach( $_SESSION["addedPost"] as $post) {
-                $cardDiv = $cardDiv . "<div class=\"card postBox CustomCol-4\" >
-                                        <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
-                                        <div class=\"card-body\">
-                                            <h2 class=\"card-title\">$content[0]</h2>
-                                            <p class=\"card-text\">$content[1]</p>
-                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinModal\">
-                                                Join
-                                            </button>
-                                            <div class=\"modal fade\" id=\"joinModal\" tabindex=\"-1\" aria-labelledby=\"joinModalLabel\" aria-hidden=\"true\">
-                                                <div class=\"modal-dialog\">
-                                                    <div class=\"modal-content\">
-                                                        <div class=\"modal-body\">
-                                                            Are you sure that you want to join?
-                                                        </div>
-                                                        <div class=\"modal-footer\">
-                                                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
-                                                            <button type=\"button\" class=\"btn btn-primary\">Yes</button>
+                $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
+                                            <div class=\"card postBox CustomCol-4\" >
+                                                <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                                                <div class=\"card-body\">
+                                                    <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
+                                                    <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
+                                                    <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
+                                                    <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
+                                                    <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinformModal\">
+                                                        Join
+                                                    </button>
+                                                    <div class=\"modal fade\" id=\"joinformModal\" tabindex=\"-1\" aria-labelledby=\"joinformModalLabel\" aria-hidden=\"true\">
+                                                        <div class=\"modal-dialog\">
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-body\">
+                                                                    Are you sure that you want to join?
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
+                                                                    <button type=\"submit\" class=\"btn btn-primary\" name=\"join\" value=\"true\">Yes</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>";
+                                         </form>";
 //            }
         }
         $_SESSION["cardDiv"] = $cardDiv;
 //        print_r($_SESSION["addedPost"]);
         include("./mainPage.php");
+
+    }
+
+    public function join() {
+        print_r($_POST);
+        if(!empty($_POST["joinedTitle"])) {
+            $joinTitle = $_POST["joinedTitle"];
+            echo $joinTitle;
+        }
+        if(!empty($_POST["joinedTitle"])) {
+            $res = $this->db->query("select * from posts where title = $1;", $joinTitle);
+            if (!empty($res)) {
+                $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
+                if ($tmpPar >= 1) {
+                    echo $tmpPar;
+                    $tmpPar = $tmpPar - 1;
+                    $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
+                } else {
+                    echo "<script>alert(\"The post has reached upper limit for participants\")</script>";
+                }
+            }
+        }
+        $this->showMainPage();
 
     }
 

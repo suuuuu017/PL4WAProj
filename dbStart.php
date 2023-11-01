@@ -26,7 +26,7 @@ else{
 //}
 
 
-$res = pg_query($dbHandle, "select * from posts where title='test';");
+$res = pg_query($dbHandle, "select * from posts where title='testtesttest';");
 if ($res) {
     echo "Success reading";
 } else {
