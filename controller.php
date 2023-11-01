@@ -316,8 +316,10 @@ class controller {
             $m1 .= "You didn't enter your password at twice<br>";
         }
         if ( $m1 === "") {
-             // SAVE ALL OF THE CONTENT
-             $this->showMainPage();
+            $this->db->query("insert into users (name, email, password) 
+                            values ($1, $2, $3);",
+                $_POST['username'], $_POST['email'], $_POST['password1']);
+            $this->showMainPage();
         }
         else {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">

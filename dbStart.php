@@ -26,7 +26,7 @@ else{
 //}
 
 
-$res = pg_query($dbHandle, "select * from posts;");
+$res = pg_query($dbHandle, "select * from users;");
 if ($res) {
     echo "Success reading";
 } else {
@@ -45,16 +45,20 @@ while ($row = pg_fetch_row($res)) {
     echo "<br />\n";
 }
 
+//$res  = pg_query($dbHandle, "drop table users;");
+//$res  = pg_query($dbHandle, "drop table posts;");
+//
 //$res  = pg_query($dbHandle, "create sequence user_seq;");
-
-// Create tablse
-
+//
+//// Create tablse
+//
 //$res  = pg_query($dbHandle, "create table users (
 //            id  int primary key default nextval('user_seq'),
 //            name text,
 //            email text,
-//            password text);");
-
+//            password text,
+//            description text);");
+//
 //$res  = pg_query($dbHandle, "create sequence post_seq;");
 //
 //$res  = pg_query($dbHandle, "create table posts (

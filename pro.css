@@ -32,5 +32,5 @@ img:hover{
     -moz-transition:.5s;
     -webkit-transition:.5s;
     transition:.5s;
-    box-shadow: 10px 10px 5px #888888;
+    /*box-shadow: 10px 10px 5px #888888;*/
   }
