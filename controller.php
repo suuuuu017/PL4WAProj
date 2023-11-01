@@ -266,6 +266,7 @@ class controller {
             $joinTitle = $_POST["joinedTitle"];
 //            echo $joinTitle;
         }
+        $message = "";
         if(!empty($_POST["joinedTitle"])) {
             $res = $this->db->query("select * from posts where title = $1;", $joinTitle);
             if (!empty($res)) {
@@ -274,12 +275,16 @@ class controller {
 //                    echo $tmpPar;
                     $tmpPar = $tmpPar - 1;
                     $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
-                } else {
-                    echo "<script>alert(\"The post has reached upper limit for participants\")</script>";
+                }
+                else {
+                    $message = "<div class=\"alert alert-danger \" role=\"alert\">
+                                 The post has reached upper limit for participants 
+                                 </div>";
+
                 }
             }
         }
-        $this->showMainPage();
+        $this->showMainPage($message);
 
     }
 
