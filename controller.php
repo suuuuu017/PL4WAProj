@@ -130,6 +130,8 @@ class controller {
             $par = "No paragraph";
         }
 
+        //TODO: need to verify input
+
         $content = array();
         $content[0] = $title;
         $content[1] = $description;
