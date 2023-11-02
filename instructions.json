@@ -1,7 +1,0 @@
-    {
-            "sign-in": "If you have already created an account, please sign in with your username which is our uva email and password",
-            "register": "If you haven't created an account with us, please register by clicking on 'create an account'. Your username can be whatever you wish. Your email must be a uva email ending in virginia.edu. Your password must be a minumum of 8 characters and at least 1 special character and Capital Letter",
-            "main":"This is where your feed will exist. Here, you can see hiking trips from fellow students. You will be able to see all your posts along with all other uva students here. The posts are ordered by publish date and will disapear when the event is passed. In order ot join a group, just click join on the respective post!",
-            "profile" : "This page depicts your information for yourself edit and see and share with others. It displays your username, profile photo, and active/past posts. On each of your posts are options to delete and edit the respective posts. You can filter through active and past posts. ",
-            "flow" : "On every page, you are able to logout and switch to either the mainpage or profile page!"
-    }

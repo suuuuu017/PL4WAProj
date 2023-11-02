@@ -124,7 +124,6 @@
           <nav class="nav nav-masthead justify-content-center float-md-end ">
             <a type="submit" class="nav-link fw-bold py-1 px-0" aria-current="page" href="?command=showMainPage">Home</a>
             <a type="submit" class="nav-link fw-bold py-1 px-0 active" href="?command=showProfile">Profile</a>
-            <a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=showAbout">About</a>
             <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
           </nav>
         </div>

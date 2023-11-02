@@ -96,6 +96,7 @@
         }
     </style>
 
+
     <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
@@ -125,59 +126,48 @@
             <nav class="nav nav-masthead justify-content-center float-md-end ">
                 <a type="submit" class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="?command=showMainPage">Home</a>
                 <a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=showProfile">Profile</a>
-                <a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=showAbout">About</a>
-<a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=logout">Logout</a>
+                <a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=logout">Logout</a>
                 <!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
             </nav>
         </div>
     </header>
-
 <!--TODO: the card is tilted to the left not in the middle need fixing-->
     <main class="px-3">
         <div>
-<!--            <div class="card postBox CustomCol-4">-->
-<!--                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
-<!--                <div class="card-body">-->
-<!--                    <h2 class="card-title">Hike</h2>-->
-<!--                    <p class="card-text">Some description of the hike.</p>-->
-<!--                    <a href="#" class="btn joinBtn">Join</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="card postBox CustomCol-4" >-->
-<!--                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
-<!--                <div class="card-body">-->
-<!--                    <h2 class="card-title">Hike</h2>-->
-<!--                    <p class="card-text">Some description of the hike.</p>-->
-<!--                    <a href="#" class="btn joinBtn">Join</a>-->
-<!--                </div>-->
-<!--            </div>-->
-            <div class="card postBox CustomCol-4" >
-                <img src="McAfee.png" class="card-img-top" alt="mountains and sky">
-                <div class="card-body">
-                    <h2 class="card-title">Hike</h2>
-                    <p class="card-text">Some description of the hike.</p>
-                    <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">
-                        Join
-                    </button>
-                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-<!--                                <div class="modal-header">-->
-<!--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
-<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+            <?=$message?>
+        </div>
+        <div>
+<!--            <form action="?command=join" method="post">-->
+<!--                <div class="card postBox CustomCol-4" >-->
+<!--                    <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
+<!--                    <div class="card-body">-->
+<!--                        <input type="hidden" name="joinedTitle" value="Hike">-->
+<!--                        <input type="hidden" name="joinDes" value="Some description of the hike">-->
+<!--                        <h2 class="card-title" >Hike</h2>-->
+<!--                        <p class="card-text">Some description of the hike.</p>-->
+<!--                        <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">-->
+<!--                            Join-->
+<!--                        </button>-->
+<!--                        <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">-->
+<!--                            <div class="modal-dialog">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                       <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
+<!--                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                   </div>-->
+<!--                                    <div class="modal-body">-->
+<!--                                        Are you sure that you want to join?-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-footer">-->
+<!--                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
+<!--                                        <button type="submit" class="btn btn-primary" name="join" value="true">Yes</button>-->
+<!--                                    </div>-->
 <!--                                </div>-->
-                                <div class="modal-body">
-                                    Are you sure that you want to join?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-primary">Yes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
             <?=$cardDiv?>
         </div>
     </main>
@@ -214,7 +204,7 @@
                             </div>
                             <div class="addImgBox">
                                 <label for="myPar" class="addImgText">Participants needed:</label>
-                                <input type="number" id="myPar" name="myPar" max="100">
+                                <input type="number" id="myPar" name="myPar" max="100" required>
                             </div>
                         </div>
                         <div class="modal-footer">
