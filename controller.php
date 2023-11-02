@@ -74,7 +74,6 @@ class controller {
         // }
         include("mainPage.php");
     }
-
     public function verifylogin(){
         $email = $_POST["email"];
         $password = $_POST["password"];
