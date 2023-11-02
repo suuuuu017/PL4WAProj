@@ -67,6 +67,10 @@ class controller {
                 print($this->returnActivePost());
                 break;
 
+            case "showAbout":
+                $this->showAbout();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -74,6 +78,9 @@ class controller {
         }
     }
 
+    public function showAbout(){
+        include("about.php");
+    }
     public function returnActivePost(){
         $res = $this->db->query("select * from posts where date > now()::date;");
         if($res){
