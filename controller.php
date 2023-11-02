@@ -63,6 +63,10 @@ class controller {
                 $this->editPost();
                 break;
 
+            case "activePost":
+                print($this->returnActivePost());
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -70,6 +74,16 @@ class controller {
         }
     }
 
+    public function returnActivePost(){
+        $res = $this->db->query("select * from posts where date > now()::date;");
+        if($res){
+            $json = json_encode($res);
+        }
+        else{
+            $json = json_encode(array());
+        }
+        return $json;
+    }
 
     public function attachtoprofileDiv($pd="", $t="", $d=""){
         $profileDiv = $pd. "<div class=\"card postBox CustomCol-4\" >
@@ -235,7 +249,7 @@ class controller {
         // }
         $cardDiv = $this->loadPostfromdb();
         $message = $msg;
-        include("mainPage.php");
+        include("mainpage.php");
     }
 
     public function verifylogin(){
