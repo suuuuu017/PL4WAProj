@@ -65,6 +65,7 @@ class controller {
 
             case "showAbout":
                 $this->showAbout();
+                break;
 
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
