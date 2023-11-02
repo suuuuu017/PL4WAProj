@@ -1,10 +1,10 @@
 <?php
 class Config {
     public static $db = [
-        "host" => "db",
+        "host" => "localhost",
         "port" => "5432",
-        "user" => "localuser",
-        "pass" => "cs4640LocalUser!",
-        "database" => "example"
+        "user" => "qvw9pv",
+        "pass" => "SiS9h2_cl0H0",
+        "database" => "qvw9pv"
     ];
 }
