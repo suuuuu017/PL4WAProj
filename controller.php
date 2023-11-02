@@ -63,6 +63,9 @@ class controller {
                 $this->editPost();
                 break;
 
+            case "showAbout":
+                $this->showAbout();
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -138,6 +141,10 @@ class controller {
 
     public function editPost(){
 
+    }
+
+    public function showAbout() {
+        include('about.php');
     }
 
 
