@@ -67,6 +67,10 @@ class controller {
                 print($this->returnActivePost());
                 break;
 
+            case "showAbout":
+                $this->showAbout();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -215,10 +219,10 @@ class controller {
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
                                             <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
-                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
+                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinformModal\">
                                                 Join
                                             </button>
-                                            <div class=\"modal fade\" id=\"joinform$content[0]Modal\" tabindex=\"-1\" aria-labelledby=\"joinform$content[0]ModalLabel\" aria-hidden=\"true\">
+                                            <div class=\"modal fade\" id=\"joinformModal\" tabindex=\"-1\" aria-labelledby=\"joinformModalLabel\" aria-hidden=\"true\">
                                                 <div class=\"modal-dialog\">
                                                     <div class=\"modal-content\">
                                                         <div class=\"modal-body\">
@@ -249,7 +253,7 @@ class controller {
         // }
         $cardDiv = $this->loadPostfromdb();
         $message = $msg;
-        include("mainpage.php");
+        include("mainPage.php");
     }
 
     public function verifylogin(){
@@ -378,7 +382,6 @@ class controller {
 //            echo $joinTitle;
         }
         $message = "";
-//        print_r($_POST);
         if(!empty($_POST["joinedTitle"])) {
             $res = $this->db->query("select * from posts where title = $1;", $joinTitle);
             if (!empty($res)) {
