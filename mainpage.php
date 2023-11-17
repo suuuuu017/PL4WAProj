@@ -10,6 +10,8 @@
     <title>HoosHiking</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 
 
@@ -96,7 +98,6 @@
         }
     </style>
 
-
     <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
@@ -123,6 +124,8 @@
     <header class="mb-auto">
         <div>
             <h1 class="float-md-start mb-0">HoosHiking</h1>
+            <label for="search"></label><input class="searchBox float-md-none" type="text" id="search"
+                                                  name="search" value="" placeholder="search">
             <nav class="nav nav-masthead justify-content-center float-md-end ">
                 <a type="submit" class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="?command=showMainPage">Home</a>
                 <a type="submit" class="nav-link fw-bold py-1 px-0" href="?command=showProfile">Profile</a>
@@ -132,7 +135,7 @@
         </div>
     </header>
 <!--TODO: the card is tilted to the left not in the middle need fixing-->
-    <main class="px-3">
+    <main class="px-3 cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <div>
             <?=$message?>
         </div>
@@ -240,5 +243,40 @@
 <!--        }-->
 <!---->
 <!--</script>-->
+<script>
+    function addComment(){
+        alert("now developing");
+    }
+
+    // using jquery
+    $(document).ready(function() {
+        $('#search').keypress(function(event) {
+            if (event.keyCode === 13) {
+                // event.preventDefault();
+                var ajax = new XMLHttpRequest();
+                var searchTerm = this.value;
+                // TODO: this will land back to controller case search
+                // ajax.open("POST", "./index.php?command=search", true);
+                ajax.open("GET", "./search.php?searchTerm=" + encodeURIComponent(searchTerm), true);
+                ajax.responseType = "json";
+                ajax.send();
+
+                ajax.addEventListener("load", function() {
+                    if (this.status === 200) {
+                        var res = this.response;
+                        alert(res);
+                    }
+                    else {
+                        alert("An error occurred");
+                    }
+                });
+                ajax.addEventListener("error", function() {
+                    alert("An error occurred");
+                });
+            }
+        });
+
+    });
+</script>
 </body>
 </html>

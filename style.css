@@ -247,3 +247,16 @@ table {
 #myPar:out-of-range{
     background-color: coral;
 }
+
+.inputBox{
+    text-align: center;
+    width: 10%;
+    padding: 2px;
+    margin: 10px 10px;
+    border: 1px solid #fff;
+    outline: none;
+    border-bottom: 1px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+    -webkit-box-align: center;
+}

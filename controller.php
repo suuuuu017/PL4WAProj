@@ -71,6 +71,10 @@ class controller {
                 $this->showAbout();
                 break;
 
+            case "search":
+                echo "<script>console.log('searching developing');</script>";
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -224,6 +228,9 @@ class controller {
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
                                                 Join
+                                            </button>
+                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" onclick='addComment(); return false;'>
+                                                Comments
                                             </button>
                                             <div class=\"modal fade\" id=\"joinform$content[0]Modal\" tabindex=\"-1\" aria-labelledby=\"joinform$content[0]ModalLabel\" aria-hidden=\"true\">
                                                 <div class=\"modal-dialog\">
