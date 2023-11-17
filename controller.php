@@ -350,6 +350,9 @@ class controller {
         $this->db->query("insert into userpost (email, title) 
                             values ($1, $2);",
                             $_SESSION["email"], $title);
+        $this->db->query("insert into userjoined (email, title) 
+                            values ($1, $2);",
+                            $_SESSION["email"], $title);
         if(key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])){
             $allAdded = array();
         }
@@ -389,17 +392,29 @@ class controller {
         if(!empty($_POST["joinedTitle"])) {
             $res = $this->db->query("select * from posts where title = $1;", $joinTitle);
             if (!empty($res)) {
-                $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
-                if ($tmpPar >= 1) {
+                $ifjoined = $this->db->query("select * from userjoined where email = $1 and title = $2;"
+                    , $_SESSION["email"], $joinTitle);
+                if(empty($ifjoined)) {
+                    $this->db->query("insert into userjoined (email, title) 
+                            values ($1, $2);",
+                        $_SESSION["email"], $joinTitle);
+                    $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
+                    if ($tmpPar >= 1) {
 //                    echo $tmpPar;
-                    $tmpPar = $tmpPar - 1;
-                    $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
-                }
-                else {
-                    $message = "<div class=\"alert alert-danger \" role=\"alert\">
+                        $tmpPar = $tmpPar - 1;
+                        $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
+                    }
+                    else {
+                        $message = "<div class=\"alert alert-danger \" role=\"alert\">
                                  The post has reached upper limit for participants 
                                  </div>";
 
+                    }
+                }
+                else{
+                    $message = "<div class=\"alert alert-danger \" role=\"alert\">
+                                 You have already joined this post 
+                                 </div>";
                 }
             }
         }

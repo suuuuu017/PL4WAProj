@@ -1,11 +1,11 @@
 <?php
 
 // Note that these are for the local Docker container
-$host = "localhost";
+$host = "db";
 $port = "5432";
-$database = "qvw9pv";
-$user = "qvw9pv";
-$password = "SiS9h2_cl0H0";
+$database = "example";
+$user = "localuser";
+$password = "cs4640LocalUser!";
 
 $dbHandle = pg_connect("host=$host port=$port dbname=$database user=$user password=$password");
 
@@ -60,10 +60,10 @@ else{
 //
 //while ($row = pg_fetch_row($res)) {
 //    echo "<br />\n";
-//    echo "$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7]";
+//    echo "$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7] $row[8]";
 //    echo "<br />\n";
 //}
-//
+
 //$res = pg_query($dbHandle, "select * from userpost;");
 //if ($res) {
 //    echo "Success reading";
@@ -82,10 +82,11 @@ else{
 //    echo "$row[0] $row[1] $row[2] $row[3] $row[4] $row[5] $row[6] $row[7]";
 //    echo "<br />\n";
 //}
-
+//
 $res  = pg_query($dbHandle, "drop table users;");
 $res  = pg_query($dbHandle, "drop table posts;");
 $res = pg_query($dbHandle, "drop table userpost;");
+$res = pg_query($dbHandle, "drop table userjoined;");
 
 $res  = pg_query($dbHandle, "create sequence user_seq;");
 
@@ -117,6 +118,15 @@ $res  = pg_query($dbHandle, "create sequence userpost_seq;");
 
 $res  = pg_query($dbHandle, "create table userpost (
             id  int primary key default nextval('userpost_seq'),
+            email text,
+            title text);");
+
+$res  = pg_query($dbHandle, "create sequence userjoined_seq;");
+
+// Create tablse
+
+$res  = pg_query($dbHandle, "create table userjoined (
+            id  int primary key default nextval('userjoined_seq'),
             email text,
             title text);");
 
