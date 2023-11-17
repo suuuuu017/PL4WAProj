@@ -467,13 +467,23 @@ class controller {
 
 
     public function editProfile() {
-        // if(isset($_POST['userName']) && isset($_POST['description'])) {
-//            $_SESSION['userName'] = $_POST['userName'];
-//            $_SESSION['description'] = $_POST['description'];
-        // }
+        if(isset($_POST['userName']) && isset($_POST['description'])) {
+           $_SESSION['userName'] = $_POST['userName'];
+           $_SESSION['description'] = $_POST['description'];
+        }
         $email = $_SESSION["email"];
         $newName = $_POST["userName"];
         $newDes = $_POST["description"];
+        
+        // if(!isset($_POST["facebook"]) || !isset($_POST["instagram"]) || !isset($_POST['twitter'])) {
+        // $_SESSION['instagram'] = $_POST['instagram'];
+        // $instagram = $_SESSION['instagram'];
+        // $_SESSION['twitter'] = $_POST['twitter'];
+        // $twitter = $_SESSION['twitter'];
+        // $_SESSION['facebook'] = $_POST['facebook'];
+        // $facebook = $_SESSION['facebook'];
+        // }
+        
         //TODO: update profile photo too
         $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
         $this->showProfile();

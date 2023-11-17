@@ -147,7 +147,7 @@
       <form action="?command=editProfile" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                        <h1 style="color: black;"class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -163,6 +163,18 @@
                             <label style="color: black" for="myImage" class="addImgText">Upload a new Profile Photo:</label>
                             <input type="file" id="myImage" name="profileImage">
                         </div>
+                        <div>
+                          <label style="color: black" for="instagram">Instagram:</label>
+                            <input style="color: black" class="postNameBox" type="text" name="instagram" placeholder="jane123" required>
+                        </div>
+                        <div>
+                          <label style="color: black" for="twitter">Twitter:</label>
+                            <input style="color: black" class="postNameBox" type="text" name="twitter" placeholder="@twitter" required>
+                        </div>
+                        <div>
+                          <label style="color: black" for="facebook">Facebook:</label>
+                            <input style="color: black" class="postNameBox" type="text" name="facebook" placeholder="@facebook" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
@@ -176,15 +188,15 @@
 
           <div class="row">
             <div class="col-1">
-              <img class="social" src="assets/images/instagram.png" alt="instagram">
-              <img class="social" src="assets/images/facebook.png" alt="facebook">
-              <img class="social" src="assets/images/twitter.png" alt="twitter">
+              <a href="https://www.instagram.com/<?= $instagram ?>"> <img class="social" src="assets/images/instagram.png" alt="instagram"> </a>
+              <a href="https://www.facebook.com/<?= $facebook?>"><img class="social" src="assets/images/facebook.png" alt="facebook"> </a>
+              <a href="https://twitter.com/<?= $twitter ?>"><img class="social" src="assets/images/twitter.png" alt="twitter"> </a>
             </div>
           
             <div class="col-11 description">
             <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
           
-            <p><?=$description?></p>
+            <p style="text-align: center;"><?=$description?></p>
 
             </div>
 
