@@ -284,13 +284,14 @@
                         console.log(res);
                         $("#cardSearch").empty();
                         for(let i = 0; i < res.length; i++){
-                            $("#cardSearch").append(' <div class="card postBox CustomCol-4" > \
+                            $("#cardSearch").append(' <form action="?command=join" method="post"\
+                            <div class="card postBox CustomCol-4" > \
                                 <img src="McAfee.png" class="card-img-top" alt="mountains and sky"> \
                                 <div class="card-body"> \
-                                <input type="hidden" name="joinedTitle" value="Hike"> \
-                                <input type="hidden" name="joinDes" value="Some description of the hike"> \
-                                <h2 class="card-title" >' + res[i]['title'] +  '</h2>  \
-                                <p class="card-text">' + res[i]['description'] +  '</p> \
+                                <input type="hidden" name="joinedTitle" value="' + res[i]['title'] + '"> \
+                                <input type="hidden" name="joinDes" value="' + res[i]['description'] + '"> \
+                                <h2 class="card-title" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['title'] +  '</h2>  \
+                                <p class="card-text" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['description'] +  '</p> \
                                 <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal"> \
                                     Join \
                                 </button>  \
@@ -306,14 +307,14 @@
                                             </div> \
                                             <div class="modal-footer"> \
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button> \
-                                                <button type="submit" class="btn btn-primary" name="join" value="true" onclick="checkJoin(' +
-                                                    '); return false;">Yes</button> \
+                                                <button type="submit" class="btn btn-primary" name="join" value="true" >Yes</button> \
                                             </div> \
                                         </div> \
                                     </div> \
                                 </div> \
                                 </div> \
                                 </div> \
+                                </form> \
                                 ')
                         }
                     }

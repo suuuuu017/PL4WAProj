@@ -52,7 +52,7 @@ class controller {
                 break;
 
             case "join":
-                echo "<script>console.log('join called');</script>";
+//                echo "<script>console.log(\"i am here\");</script>";
                 $this->join();
                 break;
 
@@ -395,8 +395,14 @@ class controller {
 //        print_r($_POST);
         if(!empty($_POST["joinedTitle"])) {
             $joinTitle = $_POST["joinedTitle"];
-//            echo $joinTitle;
+            $email = $_SESSION["email"];
+//            echo "<script>console.log(\"$email\");</script>";
+//            echo "<script>console.log(\"$joinTitle\");</script>";
         }
+        else{
+//            echo "<script>console.log(\"no titile\");</script>";
+        }
+
         $message = "";
 //        print_r($_POST);
         if(!empty($_POST["joinedTitle"])) {
@@ -404,6 +410,7 @@ class controller {
             if (!empty($res)) {
                 $ifjoined = $this->db->query("select * from userjoined where email = $1 and title = $2;"
                     , $_SESSION["email"], $joinTitle);
+//                echo "<script>console.log(\"finding join\");</script>";
                 if(empty($ifjoined)) {
                     $this->db->query("insert into userjoined (email, title) 
                             values ($1, $2);",
@@ -428,8 +435,8 @@ class controller {
                 }
             }
         }
+//        echo "<script>console.log(\"$message\");</script>";
         $this->showMainPage($message);
-
     }
 
 
