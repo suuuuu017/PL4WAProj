@@ -52,6 +52,7 @@ class controller {
                 break;
 
             case "join":
+                echo "<script>console.log('join called');</script>";
                 $this->join();
                 break;
 
@@ -72,7 +73,9 @@ class controller {
                 break;
 
             case "search":
-                echo "<script>console.log('searching developing');</script>";
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                echo $data;
                 break;
 
             default:

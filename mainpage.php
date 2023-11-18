@@ -12,7 +12,24 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>
+        function checkJoin(){
+            alert(this.value);
 
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", "./index.php?command=join", true);
+            ajax.send();
+            ajax.addEventListener("load", function() {
+                if (this.status === 200) {
+                    var r = this.response;
+
+                }
+                else {
+                    alert("An error occurred");
+                }
+            });
+        }
+    </script>
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -136,10 +153,10 @@
     </header>
 <!--TODO: the card is tilted to the left not in the middle need fixing-->
     <main class="px-3 cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <div>
+        <div id="mess">
             <?=$message?>
         </div>
-        <div>
+        <div id="cardSearch">
 <!--            <form action="?command=join" method="post">-->
 <!--                <div class="card postBox CustomCol-4" >-->
 <!--                    <img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
@@ -264,7 +281,41 @@
                 ajax.addEventListener("load", function() {
                     if (this.status === 200) {
                         var res = this.response;
-                        alert(res);
+                        console.log(res);
+                        $("#cardSearch").empty();
+                        for(let i = 0; i < res.length; i++){
+                            $("#cardSearch").append(' <div class="card postBox CustomCol-4" > \
+                                <img src="McAfee.png" class="card-img-top" alt="mountains and sky"> \
+                                <div class="card-body"> \
+                                <input type="hidden" name="joinedTitle" value="Hike"> \
+                                <input type="hidden" name="joinDes" value="Some description of the hike"> \
+                                <h2 class="card-title" >' + res[i]['title'] +  '</h2>  \
+                                <p class="card-text">' + res[i]['description'] +  '</p> \
+                                <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal"> \
+                                    Join \
+                                </button>  \
+                                <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true"> \
+                                    <div class="modal-dialog"> \
+                                        <div class="modal-content"> \
+                                            <div class="modal-header"> \
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> \
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> \
+                                            </div> \
+                                            <div class="modal-body"> \
+                                                Are you sure that you want to join? \
+                                            </div> \
+                                            <div class="modal-footer"> \
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button> \
+                                                <button type="submit" class="btn btn-primary" name="join" value="true" onclick="checkJoin(' +
+                                                    '); return false;">Yes</button> \
+                                            </div> \
+                                        </div> \
+                                    </div> \
+                                </div> \
+                                </div> \
+                                </div> \
+                                ')
+                        }
                     }
                     else {
                         alert("An error occurred");
@@ -275,7 +326,6 @@
                 });
             }
         });
-
     });
 </script>
 </body>
