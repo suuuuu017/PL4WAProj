@@ -29,6 +29,29 @@
                 }
             });
         }
+
+        function saveImg(){
+            $('#myFile').change(function() {
+                var myImg = this.files[0];
+                var fileType = myImg["type"];
+                var imgTypes = ["image/gif", "image/jpeg", "image/png"];
+                if ($.inArray(fileType, imgTypes) < 0) {
+                    // TODO: make the alert better
+                    alert('You must select an image file only.');
+                }
+                var imgSave = new FormData();
+                imgSave.append($('#myTitle'), myImg);
+                $.ajax({
+                    method: 'POST',
+                    address: './imgData',
+                    data: frm,
+                    contentType: false,
+                    processData: false,
+                    cache: false
+                });
+            });
+            return true;
+        }
     </script>
 
 
@@ -205,7 +228,7 @@
                         </div>
                         <div class="modal-body">
                             <div>
-                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>
+                                <input class="postNameBox" type="text" id="myTitle" name="postName" placeholder="New Adventure" required>
                             </div>
                             <div>
                                 <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
@@ -229,7 +252,7 @@
                         </div>
                         <div class="modal-footer">
     <!--                        TODO: change color scheme of the btn to match the whole website-->
-                            <button class="btn joinBtn" type="submit" id="postBtn">Post</button>
+                            <button class="btn joinBtn" type="submit" id="postBtn"">Post</button>
                             <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
@@ -324,6 +347,35 @@
                 });
                 ajax.addEventListener("error", function() {
                     alert("An error occurred");
+                });
+            }
+        });
+        $('#myFile').change(function() {
+            var myImg = document.getElementById('myFile').files[0];
+            var fileType = myImg["type"];
+            var imgTypes = ["image/gif", "image/jpeg", "image/png"];
+            if ($.inArray(fileType, imgTypes) < 0) {
+                // TODO: make the alert better
+                alert('The file uploaded needs to be gif, jpeg or png.');
+            }
+            else{
+                // alert('Uploading.');
+                var imgSave = new FormData();
+                imgSave.append(0, myImg);
+                // alert("title is " + myImg["name"]);
+                // alert("img is " + myImg);
+                var aj = new XMLHttpRequest();
+                aj.open("POST", "./imgUpload.php", true);
+                aj.send(imgSave);
+                aj.addEventListener("load", function() {
+                    if (this.status === 200) {
+                        var r = this.response;
+                        // alert("here");
+                        // alert(r);
+                    }
+                    else {
+                        alert("An error occurred");
+                    }
                 });
             }
         });
