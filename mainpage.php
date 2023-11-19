@@ -290,6 +290,10 @@
 
     // using jquery
     $(document).ready(function() {
+        setTimeout(() => {
+            document.getElementById("mess").innerHTML = "";
+        }, 3000);
+
         $('#search').keypress(function(event) {
             if (event.keyCode === 13) {
                 // event.preventDefault();
