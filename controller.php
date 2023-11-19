@@ -223,7 +223,7 @@ class controller {
     public function attach2cardiv($content, $cardDiv){
         $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
                                     <div class=\"card postBox CustomCol-4\" >
-                                        <img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                                        <img src=\"./imgData/$content[2]\" class=\"card-img-top\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
                                             <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
