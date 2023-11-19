@@ -220,7 +220,7 @@
         <button class="addBtn" id="postBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="?command=createPost" method="post">
+                <form id="newPostF" action="?command=createPost" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
@@ -309,7 +309,7 @@
                         for(let i = 0; i < res.length; i++){
                             $("#cardSearch").append(' <form action="?command=join" method="post"\
                             <div class="card postBox CustomCol-4" > \
-                                <img src="./imgData/' + res[i]['pic'] +'" class="card-img-top" alt="mountains and sky"> \
+                                <img src="./imgData/' + res[i]['pic'] +'" class="card-img-top postImg" alt="mountains and sky"> \
                                 <div class="card-body"> \
                                 <input type="hidden" name="joinedTitle" value="' + res[i]['title'] + '"> \
                                 <input type="hidden" name="joinDes" value="' + res[i]['description'] + '"> \
@@ -382,5 +382,6 @@
         });
     });
 </script>
+
 </body>
 </html>

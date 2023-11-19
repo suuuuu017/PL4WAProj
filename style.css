@@ -151,6 +151,7 @@ table {
     padding: auto;
     margin: 10px;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 /* For mobile phones: */
@@ -259,4 +260,9 @@ table {
     background: transparent;
     color: #ffffff;
     -webkit-box-align: center;
+}
+
+.postImg{
+    height: 150px;
+    object-fit: cover;
 }

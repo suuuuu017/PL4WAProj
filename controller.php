@@ -223,7 +223,7 @@ class controller {
     public function attach2cardiv($content, $cardDiv){
         $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
                                     <div class=\"card postBox CustomCol-4\" >
-                                        <img src=\"./imgData/$content[2]\" class=\"card-img-top\" alt=\"mountains and sky\">
+                                        <img src=\"./imgData/$content[2]\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
                                             <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
@@ -231,9 +231,6 @@ class controller {
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
                                                 Join
-                                            </button>
-                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" onclick='addComment(); return false;'>
-                                                Comments
                                             </button>
                                             <div class=\"modal fade\" id=\"joinform$content[0]Modal\" tabindex=\"-1\" aria-labelledby=\"joinform$content[0]ModalLabel\" aria-hidden=\"true\">
                                                 <div class=\"modal-dialog\">
@@ -308,87 +305,87 @@ class controller {
 
 
     public function createPost(){
-        $title = $_POST["postName"];
-        $description = $_POST["description"];
-        $img = $_POST["img"];
-        $date = $_POST["myDate"];
-        $time = $_POST["myTime"];
-        $par = $_POST["myPar"];
-        $msg = "";
+        if(isset($_POST["postName"]) == true){
+            $title = $_POST["postName"];
+            $description = $_POST["description"];
+            $img = $_POST["img"];
+            $date = $_POST["myDate"];
+            $time = $_POST["myTime"];
+            $par = $_POST["myPar"];
+            $msg = "";
 
-        if(empty($title)){
-            $msg = "No title";
-        }
-        if(empty($description)){
-            $msg = "No description";
-        }
-        if(empty($img)){
-            $msg = "No image";
-        }
-        if(empty($date)){
-            $msg = "No date";
-        }
-        if(empty($time)){
-            $msg = "No time";
-        }
-        if(empty($par)){
-            $msg = "No participants number";
-        }
+            if (empty($title)) {
+                $msg = "No title";
+            }
+            if (empty($description)) {
+                $msg = "No description";
+            }
+            if (empty($img)) {
+                $msg = "No image";
+            }
+            if (empty($date)) {
+                $msg = "No date";
+            }
+            if (empty($time)) {
+                $msg = "No time";
+            }
+            if (empty($par)) {
+                $msg = "No participants number";
+            }
 
 
-        if(!empty($msg)){
-            //TODO; need to leave upper margin
-            $message = "<div class=\"alert alert-danger \" role=\"alert\">
+            if (!empty($msg)) {
+                //TODO; need to leave upper margin
+                $message = "<div class=\"alert alert-danger \" role=\"alert\">
                  $msg  
                  </div>";
-            $this->showMainPage($message);
-            return;
-        }
+                $this->showMainPage($message);
+                return;
+            }
 
-        //TODO: need to verify input
+            //TODO: need to verify input
 
-        $content = array();
-        $content[0] = $title;
-        $content[1] = $description;
-        $content[2] = $img;
-        $content[3] = $date;
-        $content[4] = $time;
-        $content[5] = $par;
-        $this->db->query("insert into posts (title, description, pic, date, time, parNum, postTime, currenPar) 
+            $content = array();
+            $content[0] = $title;
+            $content[1] = $description;
+            $content[2] = $img;
+            $content[3] = $date;
+            $content[4] = $time;
+            $content[5] = $par;
+            $this->db->query("insert into posts (title, description, pic, date, time, parNum, postTime, currenPar) 
                             values ($1, $2, $3, $4, $5, $6, $7, $8);",
-                    $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
-        $this->db->query("insert into userpost (email, title) 
+                $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
+            $this->db->query("insert into userpost (email, title) 
                             values ($1, $2);",
-                            $_SESSION["email"], $title);
-        $this->db->query("insert into userjoined (email, title) 
+                $_SESSION["email"], $title);
+            $this->db->query("insert into userjoined (email, title) 
                             values ($1, $2);",
-                            $_SESSION["email"], $title);
-        if(key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])){
-            $allAdded = array();
-        }
-        else{
-            $allAdded = $_SESSION["addedPost"];
-        }
+                $_SESSION["email"], $title);
+            if (key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])) {
+                $allAdded = array();
+            } else {
+                $allAdded = $_SESSION["addedPost"];
+            }
 //        print_r($_SESSION["addedPost"]);
 //        echo"<br>";
-        array_push($allAdded, $content);
-        $_SESSION["addedPost"] = $allAdded;
-        if(key_exists("cardDiv", $_SESSION) == false){
-            $cardDiv = "";
-        }
-        else {
-            $cardDiv = $_SESSION["cardDiv"];
-        }
+            array_push($allAdded, $content);
+            $_SESSION["addedPost"] = $allAdded;
+            if (key_exists("cardDiv", $_SESSION) == false) {
+                $cardDiv = "";
+            } else {
+                $cardDiv = $_SESSION["cardDiv"];
+            }
 //        print_r($_SESSION["addedPost"]);
-        if(!empty($_SESSION["addedPost"])) {
+            if (!empty($_SESSION["addedPost"])) {
 //            foreach( $_SESSION["addedPost"] as $post) {
-               $cardDiv = $this->attach2cardiv($content, $cardDiv);
+                $cardDiv = $this->attach2cardiv($content, $cardDiv);
 //            }
+            }
+            $_SESSION["cardDiv"] = $cardDiv;
         }
-        $_SESSION["cardDiv"] = $cardDiv;
+        $_POST = array();
 //        print_r($_SESSION["addedPost"]);
         $this->showMainPage();
-
     }
 
     public function join() {
