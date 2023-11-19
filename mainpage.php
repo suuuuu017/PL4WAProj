@@ -309,7 +309,7 @@
                         for(let i = 0; i < res.length; i++){
                             $("#cardSearch").append(' <form action="?command=join" method="post"\
                             <div class="card postBox CustomCol-4" > \
-                                <img src="McAfee.png" class="card-img-top" alt="mountains and sky"> \
+                                <img src="./imgData/' + res[i]['pic'] +'" class="card-img-top" alt="mountains and sky"> \
                                 <div class="card-body"> \
                                 <input type="hidden" name="joinedTitle" value="' + res[i]['title'] + '"> \
                                 <input type="hidden" name="joinDes" value="' + res[i]['description'] + '"> \
