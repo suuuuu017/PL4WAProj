@@ -350,7 +350,8 @@
                 });
             }
         });
-        $('#myFile').change(function() {
+        document.getElementById("myFile").addEventListener("change", function() {
+        // $('#myFile').change(function() {
             var myImg = document.getElementById('myFile').files[0];
             var fileType = myImg["type"];
             var imgTypes = ["image/gif", "image/jpeg", "image/png"];
