@@ -396,8 +396,8 @@ class controller {
         if(!empty($_POST["joinedTitle"])) {
             $joinTitle = $_POST["joinedTitle"];
             $email = $_SESSION["email"];
-//            echo "<script>console.log(\"$email\");</script>";
-//            echo "<script>console.log(\"$joinTitle\");</script>";
+            echo "<script>console.log(\"$email\");</script>";
+            echo "<script>console.log(\"$joinTitle\");</script>";
         }
         else{
 //            echo "<script>console.log(\"no titile\");</script>";
@@ -412,11 +412,11 @@ class controller {
                     , $_SESSION["email"], $joinTitle);
 //                echo "<script>console.log(\"finding join\");</script>";
                 if(empty($ifjoined)) {
-                    $this->db->query("insert into userjoined (email, title) 
-                            values ($1, $2);",
-                        $_SESSION["email"], $joinTitle);
                     $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
-                    if ($tmpPar >= 1) {
+                    if ($tmpPar > 1) {
+                        $this->db->query("insert into userjoined (email, title) 
+                            values ($1, $2);",
+                            $_SESSION["email"], $joinTitle);
 //                    echo $tmpPar;
                         $tmpPar = $tmpPar - 1;
                         $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);

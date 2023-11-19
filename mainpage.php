@@ -359,7 +359,7 @@
                 alert('The file uploaded needs to be gif, jpeg or png.');
             }
             else{
-                alert('Uploading.');
+                // alert('Uploading.');
                 var imgSave = new FormData();
                 imgSave.append(0, myImg);
                 // alert("title is " + myImg["name"]);
