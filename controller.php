@@ -159,7 +159,7 @@ class controller {
         foreach($res as $t){
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
-            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des);
+                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des);
         }
         return $profileshow;
     }
@@ -183,7 +183,7 @@ class controller {
         $profileDiv = $this->showUserPost();
         include("profile.php");
     }
-    public function register($message = "") {
+    public function register($message = "",$email="", $username="") {
         include ("register.php");
     }
 
@@ -439,6 +439,10 @@ class controller {
 
     public function validateRegistry() {
         $m1 = "";
+
+        $_SESSION["email"] = $_POST['email'];
+        $_SESSION['username'] = $_POST['username'];
+
         if ($_POST['email'] != "") {
             if ($this->is_uva_email($_POST['email']) !== 1) {
                 $m1 .= "The email is not a valid uva email, make sure the domain is @virginia.edu <br>";
@@ -472,9 +476,9 @@ class controller {
         else {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">
             $m1 </div>";
-            $this->register($message);
+            $this->register($message, $_SESSION['email'], $_SESSION['username']);
         }
-        $_SESSION["email"] = $_POST['email'];
+
     }
 
 
