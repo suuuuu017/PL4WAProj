@@ -202,7 +202,7 @@ class controller {
 
     public function loadPostfromdb(){
         $cardDiv = "";
-        $res = $this->db->query("select * from posts;");
+        $res = $this->db->query("select * from posts order by date desc;");
         foreach($res as $r){
             $content = array();
             $content[0] = $r["title"];
@@ -228,6 +228,8 @@ class controller {
                                             <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
                                             <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
+                                            <p class=\"card-text\" name=\"joinedDate\" value=$content[3]>Date: $content[3]</p>
+                                            <p class=\"card-text\" name=\"joinedPer\" value=$content[5]>Spots open: $content[5]</p>
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
                                                 Join

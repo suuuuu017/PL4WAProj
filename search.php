@@ -10,13 +10,13 @@
         $st = $_GET["searchTerm"];
 
         $db = new Database();
-        $res = $db->query("SELECT * FROM posts WHERE title ILIKE '%$st%';");
+        $res = $db->query("SELECT * FROM posts WHERE title ILIKE '%$st%' order by date desc;");
 
         if ($res) {
             echo json_encode($res);
         }
         else{
-            echo json_encode("Didn't find any results");
+            echo json_encode(null);
         }
     }
     if(isset($_GET["searchJoin"])){

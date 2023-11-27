@@ -253,7 +253,7 @@
                         <div class="modal-footer">
     <!--                        TODO: change color scheme of the btn to match the whole website-->
                             <button class="btn joinBtn" type="submit" id="postBtn"">Post</button>
-                            <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
+<!--                            <button type="button" class="btn joinBtn" data-bs-dismiss="modal">Save</button>-->
                         </div>
                     </div>
                 </form>
@@ -310,15 +310,18 @@
                         var res = this.response;
                         console.log(res);
                         $("#cardSearch").empty();
-                        for(let i = 0; i < res.length; i++){
-                            $("#cardSearch").append(' <form action="?command=join" method="post"\
-                            <div class="card postBox CustomCol-4" > \
-                                <img src="./imgData/' + res[i]['pic'] +'" class="card-img-top postImg" alt="mountains and sky"> \
+                        if(res != null){
+                            for (let i = 0; i < res.length; i++) {
+                                $("#cardSearch").append(' <form action="?command=join" method="post"\
+                                    <div class="card postBox CustomCol-4" > \
+                                <img src="./imgData/' + res[i]['pic'] + '" class="card-img-top postImg" alt="mountains and sky"> \
                                 <div class="card-body"> \
                                 <input type="hidden" name="joinedTitle" value="' + res[i]['title'] + '"> \
                                 <input type="hidden" name="joinDes" value="' + res[i]['description'] + '"> \
-                                <h2 class="card-title" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['title'] +  '</h2>  \
-                                <p class="card-text" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['description'] +  '</p> \
+                                <h2 class="card-title" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['title'] + '</h2>  \
+                                <p class="card-text" name="joinPer" value="' + res[i]['date'] + '">' + 'Date: ' + res[i]['date'] + '</p> \
+                                <p class="card-text" name="joinDes" value="' + res[i]['parNum'] + '">' + 'Spots open: ' + res[i]['parNum'] + '</p> \
+                                <p class="card-text" name="joinDes" value="' + res[i]['description'] + '">' + res[i]['description'] + '</p> \
                                 <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal"> \
                                     Join \
                                 </button>  \
@@ -343,6 +346,7 @@
                                 </div> \
                                 </form> \
                                 ')
+                            }
                         }
                     }
                     else {
