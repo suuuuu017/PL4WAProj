@@ -94,6 +94,10 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+
+      .hidden {
+      display: none;
+    }
     </style>
 
     <link href="cover.css" rel="stylesheet">
@@ -129,7 +133,7 @@
         </div>
       </header>
 
-    <section class="py-5 text-center container">
+    <section id="profile-contents" class="py-5 text-center container">
       <div class="row py-lg-5">
         <div class="mx-auto">
           <div class="circle">
@@ -181,7 +185,7 @@
               <img class="social" src="assets/images/twitter.png" alt="twitter">
             </div>
           
-            <div class="col-11 description">
+            <div class="col-8 description">
             <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
           
             <p><?=$description?></p>
@@ -198,123 +202,137 @@
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">
             <li class="nav-item">
-              <a class="btn joinBtn" href="#">Active Post</a>
-              <a class="btn joinBtn" href="#">Past Post</a>
+
+            <!-- TODO:: use javasacript to trigger switching the content in the body below onclick() -->
+
+              <button id ="active" class="btn joinBtn" onclick="filterPostsByDate('active')">Active Posts</button>
+              <button id ="past" class="btn joinBtn" onclick="filterPostsByDate('past')">Past Posts</button>
+              <button id ="past" class="btn joinBtn" onclick="filterPostsByDate('all')">All Posts</button>
+              <button id ="toggle" class="btn joinBtn" onclick="toggleProfile()">Hide Profile</button>
             </li>
           </ul>
         </div>
-		<div class="card-body">
-			<div>
+		  <div class="card-body">
+			  <div>
                 <?=$profileDiv?>
-<!--				<div class="card postBox CustomCol-4" >-->
-<!--					<img src="McAfee.png" class="card-img-top" alt="mountains and sky">-->
-<!--                      <div class="card-body">-->
-<!--                        <h3 class="card-title">Hike</h3>-->
-<!--                        <p class="card-text">Some description of the hike.</p>-->
-<!--                             start of edit modal -->
-<!--                        <div>-->
-<!--                          <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit Post</button>-->
-<!--                          <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">-->
-<!--                              <div class="modal-dialog">-->
-<!--                                  <form action="?command=editPost" method="post">-->
-<!--                                    <div class="modal-content">-->
-<!--                                        <div class="modal-header">-->
-<!--                                            <h1 class="modal-title fs-5" id="editPostModalLabel">Edit Post</h1>-->
-<!--                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                                        </div>-->
-<!--                                        <div class="modal-body">-->
-<!--                                            <div>-->
-<!--                                                <input class="postNameBox" type="text" name="postName" placeholder="New Adventure" required>-->
-<!--                                            </div>-->
-<!--                                            <div>-->
-<!--                                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>-->
-<!--                                            </div>-->
-<!--                                            <div class="addImgBox">-->
-<!--                                                <label for="myFile" class="addImgText">Picture for the post:</label>-->
-<!--                                                <input type="file" id="myFile" name="img">-->
-<!--                                            </div>-->
-<!--                                            <div class="addImgBox">-->
-<!--                                                <label for="myDate" class="addImgText">Date:</label>-->
-<!--                                                <input type="date" id="myDate" name="myDate">-->
-<!--                                            </div>-->
-<!--                                            <div class="addImgBox">-->
-<!--                                                <label for="myTime" class="addImgText">Time:</label>-->
-<!--                                                <input type="time" id="myTime" name="myTime">-->
-<!--                                            </div>-->
-<!--                                            <div class="addImgBox">-->
-<!--                                                <label for="myPar" class="addImgText">Participants needed:</label>-->
-<!--                                                <input type="number" id="myPar" name="myPar" max="100">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="modal-footer">-->
-<!--                    <!--                        TODO: change color scheme of the btn to match the whole website-->
-<!--                                            <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Change</button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                  </form>-->
-<!--                              </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--				</div>-->
-			</div>
-		</div>
-      <!-- end of edit post modal -->
-
-      <!-- start of delete modal -->
-<!--      <button type="button" class="btn btn-primary joinBtn" data-bs-toggle="modal" data-bs-target="#joinModal">-->
-<!--                        Delete-->
-<!--                    </button>-->
-<!--                    <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">-->
-<!--                        <div class="modal-dialog">-->
-<!--                            <div class="modal-content">-->
-<!--                                <div class="modal-header">-->
-<!--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>-->
-<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                                </div>-->
-<!--                                <div style= "color: black" class="modal-body">-->
-<!--                                    Are you sure that you want to delete?-->
-<!--                                </div>-->
-<!--                                <div class="modal-footer">-->
-<!--                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
-<!--                                    <button type="submit" class="btn btn-primary">Yes</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>      -->
-<!--      end of delete modal -->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
+			  </div>
+		  </div>
     </main>
-<!--    <div class="album py-5 bg-body-tertiary">-->
-<!--      <div class="container">-->
-
-<!--        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">-->
-
-<!--          <div class="col">-->
-<!--            <div class="card shadow-sm">-->
-<!--              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
-<!--              <div class="card-body">-->
-<!--                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-<!--                <div class="d-flex justify-content-between align-items-center">-->
-<!--                  <div class="btn-group">-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-<!--                  </div>-->
-<!--                  <small class="text-body-secondary">9 mins</small>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
 
 </div>
+
+<script type="text/javascript"> 
+  
+  function toggleProfile() {
+    var p = document.getElementById("profile-contents");
+    p.classList.toggle("hidden");
+
+    var button = document.getElementById("toggle");
+
+    if(button.innerHTML === "Hide Profile") {
+      button.innerHTML = "Show Profile";
+    }
+
+    else {
+      button.innerHTML = "Hide Profile"
+    }
+  }
+
+  
+  function getCurrentDate() {
+  const now = new Date();
+
+  // Get the current date components
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const day = String(now.getDate()).padStart(2, '0');
+
+  // Concatenate the components to form YYYY-MM-DD
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
+
+function filterPostsByDate($type) {
+    
+    var elementsArray = Array.from(document.getElementsByClassName("my-post"));
+
+    var todays_date_string = getCurrentDate();
+    const todays_date = new Date(todays_date_string);
+
+    if ($type == "active") {
+      active_posts(elementsArray, todays_date);
+    }
+
+    else if ($type == "past") {
+      past_posts(elementsArray, todays_date);
+    }
+
+    else {
+        all_posts(elementsArray);
+    }
+
+  }
+
+function active_posts(elementsArray, todays_date) {
+
+elementsArray.forEach(function(element) {
+
+let post_date_string = element.id
+
+let post_date = new Date(post_date_string);
+
+
+if (todays_date > post_date) { // if this post is still no longer active aka it happens before today we are going to hide
+
+  element.className = "my-post hidden";
+
+}
+
+else {
+  element.className = "my-post";
+}
+
+});
+
+}
+
+function past_posts(elementsArray, todays_date) {
+
+elementsArray.forEach(function(element) {
+
+let post_date_string = element.id
+
+let post_date = new Date(post_date_string);
+
+
+if (todays_date < post_date) { // if this post is active aka it happened before today then we are going to hide
+
+element.className = " my-post hidden";
+
+}
+
+else {
+element.className = "my-post";
+}
+
+});
+
+}
+
+
+function all_posts(elementsArray) {
+
+elementsArray.forEach(function(element) {
+
+element.className = "my-post";
+
+});
+
+}
+
+
+</script>
 
 
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
