@@ -99,15 +99,13 @@ class controller {
         return $json;
     }
 
-    public function attachtoprofileDiv($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX"){
+    public function attachtoprofileDiv($pd="", $t="", $d="", $date = "XX-XX-XXXX", $pic=""){
         $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
         
                 <div class=\"card postBox CustomCol-4\" >
-					<img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+                <img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
                         <h3 class=\"card-title\">$t</h3>
-                        <p class=\"card-text\">Date: $date</p>
-                        <p class=\"card-text\">Spots Open: $spots</p>
                         <p class=\"card-text\">$d</p>
                             <!-- start of edit modal -->
                         <div>
@@ -165,8 +163,8 @@ class controller {
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
-            $spots = $this->db->query("select parnum from posts where title = $1;", $title)[0]["parnum"];
-                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date);
+            $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
+                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date, $pic);
         }
         return $profileshow;
     }
@@ -228,7 +226,7 @@ class controller {
 
         
         $cardDiv = "";
-        $res = $this->db->query("select * from posts order by date desc;");
+        $res = $this->db->query("select * from posts;");
         foreach($res as $r){
             $content = array();
             $content[0] = $r["title"];
@@ -258,8 +256,6 @@ class controller {
                                             <input type=\"hidden\" name=\"date\" value=$content[3]>
 
                                             <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
-                                            <p class=\"card-text\" name=\"joinedDate\" value=$content[3]>Date: $content[3]</p>
-                                            <p class=\"card-text\" name=\"joinedPer\" value=$content[5]>Spots open: $content[5]</p>
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
                                                 Join
@@ -272,7 +268,7 @@ class controller {
                                                         </div>
                                                         <div class=\"modal-footer\">
                                                             <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
-                                                            <button type=\"submit\" class=\"btn btn-light\" name=\"join\" value=\"true\">Yes</button>
+                                                            <button type=\"submit\" class=\"btn btn-primary\" name=\"join\" value=\"true\">Yes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -543,6 +539,7 @@ class controller {
         $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
         $this->showProfile($twitter, $instagram, $facebook);
     }
+
     else {
 
     $this->showProfile();
@@ -550,3 +547,23 @@ class controller {
         }
     }
 }
+
+
+
+
+
+// " * posts where title $1,
+
+
+
+
+
+
+
+
+
+
+
+
+
+

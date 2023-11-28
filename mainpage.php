@@ -223,18 +223,18 @@
                 <form id="newPostF" action="?command=createPost" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
+                            <h1 style="color: black;" class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div>
-                                <input class="postNameBox" type="text" id="myTitle" name="postName" placeholder="New Adventure" required>
+                                <input style="color: black;" class="postNameBox" type="text" id="myTitle" name="postName" placeholder="New Adventure" required>
                             </div>
                             <div>
-                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
+                                <input style="color: black;" class="descriptionBox" type="text" name="description" placeholder="Description" required>
                             </div>
                             <div class="addImgBox">
-                                <label for="myFile" class="addImgText">Picture for the post:</label>
+                                <label style="color: black;" for="myFile" class="addImgText">Picture for the post:</label>
                                 <input type="file" id="myFile" name="img" required>
                             </div>
                             <div class="addImgBox">
