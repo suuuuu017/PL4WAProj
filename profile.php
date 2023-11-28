@@ -157,12 +157,28 @@
                     <div class="modal-body">
                         <div>
                           <label style="color: black" for="userName">Your name or Username:</label>
-                            <input style="color: black" class="postNameBox" type="text" name="userName" placeholder="Enter your Name" required>
+                            <input value="<?=$name?>" style="color: black" class="postNameBox" type="text" name="userName" required>
                         </div>
                         <div>
                           <label style="color: black" for="description">About You:</label>
-                            <textarea id="description" name="description" rows="4" cols="50"></textarea>
+                            <textarea id="description" name="description" rows="4" cols="50"><?=$description?></textarea>
                         </div>
+
+                        <div>
+                          <label style="color: black" for="twitter">Enter Your Twitter:</label>
+                            <input value="<?= $twitter?>" style="color: black" class="postNameBox" type="text" name="twitter">
+                        </div>
+
+                        <div>
+                          <label style="color: black" for="instagram">Enter Your Instagram:</label>
+                            <input value="<?=$instagram?>" style="color: black" class="postNameBox" type="text" name="instagram">
+                        </div>
+
+                        <div>
+                          <label style="color: black" for="facebook">Enter Your Facebook:</label>
+                            <input value="<?=$facebook?>" style="color: black" class="postNameBox" type="text" name="facebook">
+                        </div>
+
                         <div class="addImgBox">
                             <label style="color: black" for="myImage" class="addImgText">Upload a new Profile Photo:</label>
                             <input type="file" id="myImage" name="profileImage">
@@ -179,16 +195,39 @@
       <!-- end of edit modal -->
 
           <div class="row">
+
+            <div class="col-2"></div> <!-- Empty column for spacing -->
+
             <div class="col-1">
+              
+              <a style="text-decoration: none;" href="https://instagram.com/<?=$instagram?>">
               <img class="social" src="assets/images/instagram.png" alt="instagram">
+              </a>
+              <a style="text-decoration: none;" href="https://facebook.com/<?=$facebook?>">
               <img class="social" src="assets/images/facebook.png" alt="facebook">
+              </a>
+              <a style="text-decoration: none;" href="https://twitter.com/<?=$twitter?>">
               <img class="social" src="assets/images/twitter.png" alt="twitter">
+              </a>
             </div>
           
-            <div class="col-8 description">
+            <div class="col-6 description">
             <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
           
-            <p><?=$description?></p>
+            <p> 
+              
+              <?php 
+              
+              if($description == "") {
+                echo "You have not Created a Description Yet!";
+              }
+              
+              else {
+                  echo $description;
+                }
+               ?>
+            
+            </p>
 
             </div>
 
@@ -214,7 +253,16 @@
         </div>
 		  <div class="card-body">
 			  <div>
-                <?=$profileDiv?>
+        <?php 
+              
+              if($profileDiv == "") {
+                echo "You have not posted any trips yet!";
+              }
+              
+              else {
+                  echo $profileDiv;
+                }
+               ?>
 			  </div>
 		  </div>
     </main>
