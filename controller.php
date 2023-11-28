@@ -99,11 +99,11 @@ class controller {
         return $json;
     }
 
-    public function attachtoprofileDiv($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX"){
+    public function attachtoprofileDiv($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
         $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
         
                 <div class=\"card postBox CustomCol-4\" >
-					<img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
+					<img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
                         <h3 class=\"card-title\">$t</h3>
                         <p class=\"card-text\">Date: $date</p>
@@ -159,14 +159,15 @@ class controller {
         return $profileDiv;
     }
     public function showUserPost(){
-        $res= $this->db->query("select * from userpost where email = $1;", $_SESSION["email"]);
+        $res= $this->db->query("select * from userpost where email = $1 order by date desc;", $_SESSION["email"]);
         $profileshow = "";
         foreach($res as $t){
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
             $spots = $this->db->query("select parnum from posts where title = $1;", $title)[0]["parnum"];
-                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date);
+            $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
+            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date, $pic);
         }
         return $profileshow;
     }
@@ -380,9 +381,9 @@ class controller {
             $this->db->query("insert into posts (title, description, pic, date, time, parNum, postTime, currenPar) 
                             values ($1, $2, $3, $4, $5, $6, $7, $8);",
                 $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
-            $this->db->query("insert into userpost (email, title) 
-                            values ($1, $2);",
-                $_SESSION["email"], $title);
+            $this->db->query("insert into userpost (email, title, date) 
+                            values ($1, $2, $3);",
+                $_SESSION["email"], $title, $date);
             $this->db->query("insert into userjoined (email, title) 
                             values ($1, $2);",
                 $_SESSION["email"], $title);

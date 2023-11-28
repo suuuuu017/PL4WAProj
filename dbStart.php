@@ -119,7 +119,8 @@ $res  = pg_query($dbHandle, "create sequence userpost_seq;");
 $res  = pg_query($dbHandle, "create table userpost (
            id  int primary key default nextval('userpost_seq'),
            email text,
-           title text);");
+           title text,
+           date DATE);");
 
 $res  = pg_query($dbHandle, "create sequence userjoined_seq;");
 

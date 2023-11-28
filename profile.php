@@ -354,7 +354,7 @@ function past_posts(elementsArray, todays_date) {
     let post_date = new Date(post_date_string);
 
 
-    if (todays_date < post_date) { // if this post is active aka it happened before today then we are going to hide
+    if (todays_date <= post_date) { // if this post is active aka it happened before today then we are going to hide
 
     element.className = " my-post hidden";
 
