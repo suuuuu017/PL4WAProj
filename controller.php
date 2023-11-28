@@ -123,7 +123,7 @@ class controller {
                                                 <input style=\"color: black;\" class=\"postNameBox\" type=\"text\" name=\"postName\" value=\"$t\" required>
                                             </div>
                                             <div>
-                                            <input id=\"$t\" type=\"hidden\" name=\"title4edit\ value=\"$t\">
+                                            <input id=\"$t\" type=\"hidden\" name=\"title4edit\" value=\"$t\">
                                             </div>
                                             <div>
                                                 <input style=\"color: black;\" class=\"descriptionBox\" type=\"text\" name=\"description\" value=\"$d\" required>
@@ -174,8 +174,7 @@ class controller {
 
     function showUserJoined() {
 
-        $email = "hello";
-        //$_SESSION["email"];
+        $email = $_SESSION["email"];
         $profileshow = "";
 
         $res = $this->db->query("select * from userjoined where email = $1;", $email);
@@ -209,12 +208,25 @@ class controller {
         // use current_title for searching up the post in the db_query
         $current_title = $_POST['title4edit'];
 
+        // get the user by email
+
+        $email = $_SESSION['email'];
+
+        //updated info 
+
         $new_title = $_POST['postName'];
         $description = $_POST['description'];
         $image = $_POST['img'];
         $date = $_POST['myDate'];
         $time = $_POST['myTime'];
         $participants = $_POST['myPar'];
+
+         // now query to find the post to update
+
+        $this->db->query("update posts set description = $1 where title = $2;", $description, $current_title);
+
+        $this->showProfile();
+
 
     }
 
