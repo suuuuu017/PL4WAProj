@@ -176,7 +176,7 @@ class controller {
     }
 
 
-    public function showProfile(){
+    public function showProfile($twitter = "", $instagram = "", $facebook = ""){
         $email = $_SESSION["email"];
         $res = $this->db->query("select * from users where email = $1;", $email);
         $name="";
@@ -528,13 +528,20 @@ class controller {
         if(isset($_POST['userName']) && isset($_POST['description'])) {
            $_SESSION['userName'] = $_POST['userName'];
            $_SESSION['description'] = $_POST['description'];
+           $_SESSION['twitter'] = $_POST['twitter'];
+           $_SESSION['instagram'] = $_POST['instagram'];
+           $_SESSION['facebook'] = $_POST['facebook'];
+
+           $twitter = $_SESSION['twitter'];
+           $instagram = $_SESSION['instagram'];
+           $facebook = $_SESSION['facebook'];
 
         $email = $_SESSION["email"];
         $newName = $_POST["userName"];
         $newDes = $_POST["description"];
         //TODO: update profile photo too
         $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
-        $this->showProfile();
+        $this->showProfile($twitter, $instagram, $facebook);
     }
     else {
 
