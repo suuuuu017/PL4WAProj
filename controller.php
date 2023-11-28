@@ -99,8 +99,10 @@ class controller {
         return $json;
     }
 
-    public function attachtoprofileDiv($pd="", $t="", $d=""){
-        $profileDiv = $pd. "<div class=\"card postBox CustomCol-4\" >
+    public function attachtoprofileDiv($pd="", $t="", $d="", $date = "XX-XX-XXXX"){
+        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
+        
+                <div class=\"card postBox CustomCol-4\" >
 					<img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
                         <h3 class=\"card-title\">$t</h3>
@@ -150,7 +152,8 @@ class controller {
                           </div>
                         </div>
                       </div>
-				</div>";
+				</div>
+                </div>";
         return $profileDiv;
     }
     public function showUserPost(){
@@ -159,7 +162,8 @@ class controller {
         foreach($res as $t){
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
-                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des);
+            $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
+                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date);
         }
         return $profileshow;
     }
@@ -200,7 +204,26 @@ class controller {
         $this->showWelcome();
     }
 
+    // public function instantiatePostObjects() {
+
+    //     // have yet to include the image here
+        
+    //     function Post(title, description, date, time, parnum, posttime, currenpar) {
+    //         this.title = title;
+    //         this.description = description;
+    //         this.date= date;
+    //         this.time = time;
+    //         this.parnum= parnum;
+    //         this.posttime = posttime;
+    //         this.currenpar = currenpar;
+    //         this.displayInfo = function() {
+    //           console.log(`${this.title}, ${this.description},  ${this.date}, ${this.time}`);
+    //         };
+    //       }
+    // }
     public function loadPostfromdb(){
+
+        
         $cardDiv = "";
         $res = $this->db->query("select * from posts;");
         foreach($res as $r){
@@ -221,12 +244,16 @@ class controller {
         return $cardDiv;
     }
     public function attach2cardiv($content, $cardDiv){
+
+        // or maybe it would be easier to inject information about the date and time in the html body and have a script in the profile page to manipulate with javascript
         $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
                                     <div class=\"card postBox CustomCol-4\" >
                                         <img src=\"./imgData/$content[2]\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
                                             <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
+                                            <input type=\"hidden\" name=\"date\" value=$content[3]>
+
                                             <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
                                             <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
                                             <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
@@ -253,14 +280,7 @@ class controller {
 
     public function showMainPage($msg="") {
         $cardDiv = "";
-        // if(isset($_SESSION["cardDiv"])) {
-//        if(key_exists("cardDiv", $_SESSION) == false){
-//            $cardDiv = "";
-//        }
-//        else{
-//            $cardDiv = $_SESSION["cardDiv"];
-//        }
-        // }
+
         $cardDiv = $this->loadPostfromdb();
         $message = $msg;
         include("mainpage.php");
@@ -500,10 +520,10 @@ class controller {
 
 
     public function editProfile() {
-        // if(isset($_POST['userName']) && isset($_POST['description'])) {
-//            $_SESSION['userName'] = $_POST['userName'];
-//            $_SESSION['description'] = $_POST['description'];
-        // }
+        if(isset($_POST['userName']) && isset($_POST['description'])) {
+           $_SESSION['userName'] = $_POST['userName'];
+           $_SESSION['description'] = $_POST['description'];
+
         $email = $_SESSION["email"];
         $newName = $_POST["userName"];
         $newDes = $_POST["description"];
@@ -511,6 +531,10 @@ class controller {
         $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
         $this->showProfile();
     }
+    else {
 
+    $this->showProfile();
 
+        }
+    }
 }

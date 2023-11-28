@@ -141,7 +141,16 @@
     <main class="px-3 loginBox">
         <h1 class="loginTitle">Sign Up Here!</h1>
 
-        <?=$message?>
+        <?php 
+        if($message == "") {
+            echo "Please enter your university email and a password with a minimum of eight characters, at least one letter, one number and one special character <br>";
+        }
+
+        else {
+            echo $message;
+        }
+            
+        ?>
 
         <form action="?command=ValidateRegister" method="post">
 
