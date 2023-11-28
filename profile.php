@@ -161,7 +161,7 @@
             </div>
             <div class="row description centered-text">
             <p> 
-              
+
               <?php 
               
               if($description == "") {
@@ -280,6 +280,13 @@
                ?>
 			  </div>
 		  </div>
+
+      <div class="card-body">
+			  <div>
+            <?= $profileJoined?>
+			  </div>
+		  </div>
+      
     </main>
 
 </div>

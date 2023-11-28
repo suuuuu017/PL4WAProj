@@ -115,30 +115,33 @@ class controller {
                                   <form action=\"?command=editPost\" method=\"post\">
                                     <div class=\"modal-content\">
                                         <div class=\"modal-header\">
-                                            <h1 class=\"modal-title fs-5\" id=\"editPostModalLabel\">Edit Post</h1>
+                                            <h1 class=\"modal-title fs-5\" style=\"color: black;\" id=\"editPostModalLabel\">Edit Post</h1>
                                             <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
                                         </div>
                                         <div class=\"modal-body\">
                                             <div>
-                                                <input class=\"postNameBox\" type=\"text\" name=\"postName\" placeholder=\"New Adventure\" required>
+                                                <input style=\"color: black;\" class=\"postNameBox\" type=\"text\" name=\"postName\" value=\"$t\" required>
                                             </div>
                                             <div>
-                                                <input class=\"descriptionBox\" type=\"text\" name=\"description\" placeholder=\"Description\" required>
+                                            <input id=\"$t\" type=\"hidden\" name=\"title4edit\ value=\"$t\">
+                                            </div>
+                                            <div>
+                                                <input style=\"color: black;\" class=\"descriptionBox\" type=\"text\" name=\"description\" value=\"$d\" required>
                                             </div>
                                             <div class=\"addImgBox\">
-                                                <label for=\"myFile\" class=\"addImgText\">Picture for the post:</label>
+                                                <label for=\"myFile\" style=\"color: black;\" class=\"addImgText\">Picture for the post:</label>
                                                 <input type=\"file\" id=\"myFile\" name=\"img\">
                                             </div>
                                             <div class=\"addImgBox\">
-                                                <label for=\"myDate\" class=\"addImgText\">Date:</label>
-                                                <input type=\"date\" id=\"myDate\" name=\"myDate\">
+                                                <label style=\"color: black;\" for=\"myDate\" class=\"addImgText\">Date:</label>
+                                                <input type=\"date\" id=\"myDate\" value=\"$date\" name=\"myDate\">
                                             </div>
                                             <div class=\"addImgBox\">
-                                                <label for=\"myTime\" class=\"addImgText\">Time:</label>
+                                                <label style=\"color: black;\" for=\"myTime\" class=\"addImgText\">Time:</label>
                                                 <input type=\"time\" id=\"myTime\" name=\"myTime\">
                                             </div>
                                             <div class=\"addImgBox\">
-                                                <label for=\"myPar\" class=\"addImgText\">Participants needed:</label>
+                                                <label style=\"color: black;\" for=\"myPar\" class=\"addImgText\">Participants needed:</label>
                                                 <input type=\"number\" id=\"myPar\" name=\"myPar\" max=\"100\">
                                             </div>
                                         </div>
@@ -169,7 +172,49 @@ class controller {
         return $profileshow;
     }
 
+    function showUserJoined() {
+
+        $email = "hello";
+        //$_SESSION["email"];
+        $profileshow = "";
+
+        $res = $this->db->query("select * from userjoined where email = $1;", $email);
+
+
+        if(!empty($res)){
+            foreach($res as $t){
+            $title = $t["title"];
+            $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
+            $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
+            $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
+                        
+            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date, $pic);
+            }
+                
+        }
+
+            else {
+
+                $profileshow = "You have not joined any groups yet!";
+
+            }
+
+        return $profileshow;
+
+
+    }
+
     public function editPost(){
+
+        // use current_title for searching up the post in the db_query
+        $current_title = $_POST['title4edit'];
+
+        $new_title = $_POST['postName'];
+        $description = $_POST['description'];
+        $image = $_POST['img'];
+        $date = $_POST['myDate'];
+        $time = $_POST['myTime'];
+        $participants = $_POST['myPar'];
 
     }
 
@@ -186,6 +231,9 @@ class controller {
             $description = $res[0]["description"];
         }
         $profileDiv = $this->showUserPost();
+
+        $profileJoined = $this-> showUserJoined();
+
         include("profile.php");
     }
     public function register($message = "",$email="", $username="") {
