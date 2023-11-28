@@ -385,4 +385,12 @@ function all_posts(elementsArray) {
 
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
   </body>
+
+<script>
+    function leavepost(){
+        console.log("leavepost");
+
+
+    }
+</script>
 </html>

@@ -160,8 +160,8 @@ class controller {
     }
 
     public function attachtoprofileDivJoin($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
-        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
-        
+        $profileDiv = $pd. "<form action=\"?command=leave\" method=\"post\">
+            <div class = \"my-post\" id =\"$date\"> 
                 <div class=\"card postBox CustomCol-4\" >
 					<img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
@@ -170,12 +170,27 @@ class controller {
                         <p class=\"card-text\">Spots Open: $spots</p>
                         <p class=\"card-text\">$d</p>
                             <!-- start of edit modal -->
-                        <div>
-                          <button class=\"btn joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#editPostModal\">Leave</button>
+                        
+                        <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#leaveform{$t}Modal\">
+                            Leave
+                        </button>
+                        <div class=\"modal fade\" id=\"leaveform{$t}Modal\" tabindex=\"-1\" aria-labelledby=\"leaveform{$t}ModalLabel\" aria-hidden=\"true\">
+                            <div class=\"modal-dialog\">
+                                <div class=\"modal-content\">
+                                    <div class=\"modal-body\">
+                                        Are you sure that you want to leave?
+                                    </div>
+                                    <div class=\"modal-footer\">
+                                        <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
+                                        <button type=\"button\" class=\"btn btn-light\" name=\"leave\" value=\"true\" onclick='leavepost(); return false;'>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                       </div>
 				</div>
-                </div>";
+                </div>
+                </form>";
         return $profileDiv;
     }
     public function showUserPost(){
@@ -223,6 +238,10 @@ class controller {
     }
 
     public function editPost(){
+
+    }
+
+    public function leavePost(){
 
     }
 
