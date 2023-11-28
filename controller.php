@@ -99,13 +99,15 @@ class controller {
         return $json;
     }
 
-    public function attachtoprofileDiv($pd="", $t="", $d="", $date = "XX-XX-XXXX"){
+    public function attachtoprofileDiv($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX"){
         $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
         
                 <div class=\"card postBox CustomCol-4\" >
 					<img src=\"McAfee.png\" class=\"card-img-top\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
                         <h3 class=\"card-title\">$t</h3>
+                        <p class=\"card-text\">Date: $date</p>
+                        <p class=\"card-text\">Spots Open: $spots</p>
                         <p class=\"card-text\">$d</p>
                             <!-- start of edit modal -->
                         <div>
@@ -163,7 +165,8 @@ class controller {
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
-                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date);
+            $spots = $this->db->query("select parnum from posts where title = $1;", $title)[0]["parnum"];
+                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date);
         }
         return $profileshow;
     }

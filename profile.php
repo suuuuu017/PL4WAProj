@@ -276,58 +276,58 @@ function filterPostsByDate($type) {
 
 function active_posts(elementsArray, todays_date) {
 
-elementsArray.forEach(function(element) {
+    elementsArray.forEach(function(element) {
 
-let post_date_string = element.id
+    let post_date_string = element.id
 
-let post_date = new Date(post_date_string);
+    let post_date = new Date(post_date_string);
 
 
-if (todays_date > post_date) { // if this post is still no longer active aka it happens before today we are going to hide
+    if (todays_date > post_date) { // if this post is still no longer active aka it happens before today we are going to hide
 
-  element.className = "my-post hidden";
+      element.className = "my-post hidden";
 
-}
+    }
 
-else {
-  element.className = "my-post";
-}
+    else {
+      element.className = "my-post";
+    }
 
-});
+    });
 
 }
 
 function past_posts(elementsArray, todays_date) {
 
-elementsArray.forEach(function(element) {
+    elementsArray.forEach(function(element) {
 
-let post_date_string = element.id
+    let post_date_string = element.id
 
-let post_date = new Date(post_date_string);
+    let post_date = new Date(post_date_string);
 
 
-if (todays_date < post_date) { // if this post is active aka it happened before today then we are going to hide
+    if (todays_date < post_date) { // if this post is active aka it happened before today then we are going to hide
 
-element.className = " my-post hidden";
+    element.className = " my-post hidden";
 
-}
+    }
 
-else {
-element.className = "my-post";
-}
+    else {
+    element.className = "my-post";
+    }
 
-});
+    });
 
 }
 
 
 function all_posts(elementsArray) {
 
-elementsArray.forEach(function(element) {
+    elementsArray.forEach(function(element) {
 
-element.className = "my-post";
+    element.className = "my-post";
 
-});
+    });
 
 }
 
