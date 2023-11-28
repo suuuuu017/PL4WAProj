@@ -129,7 +129,8 @@ $res  = pg_query($dbHandle, "create sequence userjoined_seq;");
 $res  = pg_query($dbHandle, "create table userjoined (
            id  int primary key default nextval('userjoined_seq'),
            email text,
-           title text);");
+           title text,
+           date DATE);");
 
 //$res = pg_prepare($dbHandle, "myinsert", "insert into users (name, email, password) values
 //    ($1, $2, $3);");

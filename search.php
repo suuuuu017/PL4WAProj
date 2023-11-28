@@ -27,9 +27,10 @@
         $ifjoined = $this->db->query("select * from userjoined where email = $1 and title = $2;"
             , $se, $st);
         if(empty($ifjoined)) {
-            $this->db->query("insert into userjoined (email, title) 
-                            values ($1, $2);"
-                , $se, $st);
+            $date = $this->db->query("select date from posts where title = $1;", $st)[0]["date"];
+            $this->db->query("insert into userjoined (email, title, date) 
+                            values ($1, $2, $3);"
+                , $se, $st, $date);
             $tmpPar = $this->db->query("select * from posts where title = $1;", $st)[0]["parnum"];
             if ($tmpPar >= 1) {
 //                    echo $tmpPar;

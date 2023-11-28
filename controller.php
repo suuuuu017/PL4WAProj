@@ -158,17 +158,67 @@ class controller {
                 </div>";
         return $profileDiv;
     }
+
+    public function attachtoprofileDivJoin($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
+        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
+        
+                <div class=\"card postBox CustomCol-4\" >
+					<img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
+                      <div class=\"card-body\">
+                        <h3 class=\"card-title\">$t</h3>
+                        <p class=\"card-text\">Date: $date</p>
+                        <p class=\"card-text\">Spots Open: $spots</p>
+                        <p class=\"card-text\">$d</p>
+                            <!-- start of edit modal -->
+                        <div>
+                          <button class=\"btn joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#editPostModal\">Leave</button>
+                        </div>
+                      </div>
+				</div>
+                </div>";
+        return $profileDiv;
+    }
     public function showUserPost(){
         $res= $this->db->query("select * from userpost where email = $1 order by date desc;", $_SESSION["email"]);
+        $joinres = $this->db->query("select * from userjoined where email = $1 order by date desc;", $_SESSION["email"]);
+
+        $modifiedRes = [];
+        foreach($res as $r){
+            unset($r["id"]);
+            array_push($modifiedRes, $r);
+        }
+
+        $modifiedJoinres = [];
+        foreach($joinres as $r){
+            unset($r["id"]);
+            array_push($modifiedJoinres, $r);
+        }
+        // merge two returns and sort by date
+//        echo (print_r($joinres));
+//        $merged = array_merge($modifiedRes, $modifiedJoinres);
+//        $merged = array_unique($merged, SORT_NUMERIC);
+//        usort($merged, function($a, $b) {
+//            return $a['date'] <=> $b['date'];
+//        });
         $profileshow = "";
-        foreach($res as $t){
+
+            //if $t is both in $res and $joinres
+//        echo print_r($modifiedRes);
+//        echo print_r($modifiedJoinres);
+        foreach($modifiedJoinres as $t) {
             $title = $t["title"];
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
             $spots = $this->db->query("select parnum from posts where title = $1;", $title)[0]["parnum"];
             $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
-            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date, $pic);
+            if (in_array($t, $modifiedJoinres) && in_array($t, $modifiedRes)) {
+                $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $spots, $date, $pic);
+            }
+            else {
+                $profileshow = $this->attachtoprofileDivJoin($profileshow, $title, $des, $spots, $date, $pic);
+            }
         }
+
         return $profileshow;
     }
 
@@ -384,9 +434,9 @@ class controller {
             $this->db->query("insert into userpost (email, title, date) 
                             values ($1, $2, $3);",
                 $_SESSION["email"], $title, $date);
-            $this->db->query("insert into userjoined (email, title) 
-                            values ($1, $2);",
-                $_SESSION["email"], $title);
+            $this->db->query("insert into userjoined (email, title, date) 
+                            values ($1, $2, $3);",
+                $_SESSION["email"], $title, $date);
             if (key_exists("addedPost", $_SESSION) == false || empty($_SESSION["addedPost"])) {
                 $allAdded = array();
             } else {
@@ -436,10 +486,11 @@ class controller {
 //                echo "<script>console.log(\"finding join\");</script>";
                 if(empty($ifjoined)) {
                     $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
-                    if ($tmpPar > 1) {
-                        $this->db->query("insert into userjoined (email, title) 
-                            values ($1, $2);",
-                            $_SESSION["email"], $joinTitle);
+                    $tmpDate = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["date"];
+                    if ($tmpPar > 0) {
+                        $this->db->query("insert into userjoined (email, title, date) 
+                            values ($1, $2, $3);",
+                            $_SESSION["email"], $joinTitle, $tmpDate);
 //                    echo $tmpPar;
                         $tmpPar = $tmpPar - 1;
                         $this->db->query("update posts set parnum = $1 where title = $2;", $tmpPar, $_POST["joinedTitle"]);
