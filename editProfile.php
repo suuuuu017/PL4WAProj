@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
-
+    <body>
         <button class="addBtn" id="postBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -32,4 +32,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </body>
+</html>
