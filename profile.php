@@ -150,6 +150,8 @@
         <div class="mx-auto">
 
         <div class="row">
+          <div class ="col-1">
+          </div>
           <div class="col-2 circle">
             <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
           </div>
@@ -191,7 +193,7 @@
               </a>
             </div>
 
-            <div class="col-1">
+            <div class="col-2">
 
             <!-- start of edit modal -->
     <div>
@@ -286,7 +288,7 @@
             <?= $profileJoined?>
 			  </div>
 		  </div>
-      
+
     </main>
 
 </div>

@@ -99,9 +99,11 @@ class controller {
         return $json;
     }
 
-    public function attachtoprofileDiv($pd="", $t="", $d="", $date = "XX-XX-XXXX", $pic=""){
-        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
-        
+    public function attachtoprofileDiv($pd="", $id="",$t="", $d="", $date = "XX-XX-XXXX", $pic="", $time="", $parnum=""){
+
+        //echo "<script> console.log(title: ".$t."description ".$d.")</script>";
+
+        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\">
                 <div class=\"card postBox CustomCol-4\" >
                 <img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
@@ -109,8 +111,8 @@ class controller {
                         <p class=\"card-text\">$d</p>
                             <!-- start of edit modal -->
                         <div>
-                          <button class=\"btn joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#editPostModal\">Edit Post</button>
-                          <div class=\"modal fade\" id=\"editPostModal\" tabindex=\"-1\" aria-labelledby=\"editPostModalLabel\" aria-hidden=\"true\">
+                          <button class=\"btn joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#editPostModal$id\">Edit Post</button>
+                          <div class=\"modal fade\" id=\"editPostModal$id\" tabindex=\"-1\" aria-labelledby=\"editPostModalLabel\" aria-hidden=\"true\">
                               <div class=\"modal-dialog\">
                                   <form action=\"?command=editPost\" method=\"post\">
                                     <div class=\"modal-content\">
@@ -123,7 +125,7 @@ class controller {
                                                 <input style=\"color: black;\" class=\"postNameBox\" type=\"text\" name=\"postName\" value=\"$t\" required>
                                             </div>
                                             <div>
-                                            <input id=\"$t\" type=\"hidden\" name=\"title4edit\" value=\"$t\">
+                                            <input id=\"$id\" type=\"hidden\" name=\"id4edit\" value=\"$id\">
                                             </div>
                                             <div>
                                                 <input style=\"color: black;\" class=\"descriptionBox\" type=\"text\" name=\"description\" value=\"$d\" required>
@@ -132,17 +134,18 @@ class controller {
                                                 <label for=\"myFile\" style=\"color: black;\" class=\"addImgText\">Picture for the post:</label>
                                                 <input type=\"file\" id=\"myFile\" name=\"img\">
                                             </div>
+
                                             <div class=\"addImgBox\">
                                                 <label style=\"color: black;\" for=\"myDate\" class=\"addImgText\">Date:</label>
                                                 <input type=\"date\" id=\"myDate\" value=\"$date\" name=\"myDate\">
                                             </div>
                                             <div class=\"addImgBox\">
                                                 <label style=\"color: black;\" for=\"myTime\" class=\"addImgText\">Time:</label>
-                                                <input type=\"time\" id=\"myTime\" name=\"myTime\">
+                                                <input value=\"$time\" type=\"time\" id=\"myTime\" name=\"myTime\">
                                             </div>
                                             <div class=\"addImgBox\">
                                                 <label style=\"color: black;\" for=\"myPar\" class=\"addImgText\">Participants needed:</label>
-                                                <input type=\"number\" id=\"myPar\" name=\"myPar\" max=\"100\">
+                                                <input value=\"$parnum\" type=\"number\" id=\"myPar\" name=\"parNum\" max=\"100\">
                                             </div>
                                         </div>
                                         <div class=\"modal-footer\">
@@ -157,6 +160,7 @@ class controller {
                       </div>
 				</div>
                 </div>";
+        
         return $profileDiv;
     }
     public function showUserPost(){
@@ -167,7 +171,11 @@ class controller {
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
             $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
-                        $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date, $pic);
+            $time = $this->db->query("select time from posts where title = $1;", $title)[0]["time"];
+            $id = $this->db->query("select id from posts where title = $1;", $title)[0]["id"];
+            //$parnum = $this->db->query("select parNum from posts where title = $1;", $title)[0]["parNum"];
+            
+            $profileshow = $this->attachtoprofileDiv($profileshow, $id, $title, $des, $date, $pic, $time);
         }
         return $profileshow;
     }
@@ -186,8 +194,8 @@ class controller {
             $des = $this->db->query("select description from posts where title = $1;", $title)[0]["description"];
             $date = $this->db->query("select date from posts where title = $1;", $title)[0]["date"];
             $pic = $this->db->query("select pic from posts where title = $1;", $title)[0]["pic"];
-                        
-            $profileshow = $this->attachtoprofileDiv($profileshow, $title, $des, $date, $pic);
+            $id = $this->db->query("select id from posts where title = $1;", $title)[0]["id"];
+            $profileshow = $this->attachtoprofileDiv($profileshow, $id, $title, $des, $date, $pic);
             }
                 
         }
@@ -200,13 +208,20 @@ class controller {
 
         return $profileshow;
 
-
     }
 
     public function editPost(){
 
         // use current_title for searching up the post in the db_query
-        $current_title = $_POST['title4edit'];
+        
+        if(isset($_POST['id4edit']) && isset($_POST["postName"]) && isset($_POST["description"]) && isset($_POST["myDate"]) 
+        
+        && isset($_POST["myTime"])){
+
+           // && isset($_POST["parNum"])
+        $post_id = $_POST['id4edit'];
+
+        echo "<script> console.log($post_id) </script>";
 
         // get the user by email
 
@@ -219,13 +234,17 @@ class controller {
         $image = $_POST['img'];
         $date = $_POST['myDate'];
         $time = $_POST['myTime'];
-        $participants = $_POST['myPar'];
+        $participants = $_POST['parNum'];
 
-         // now query to find the post to update
+        // now query to find the post to update
 
-        $this->db->query("update posts set description = $1 where title = $2;", $description, $current_title);
-
+        $this->db->query("update posts set description = $1, date = $2, time = $3, title = $4 where id = $5;", $description, $date, $time, $new_title, $post_id);
         $this->showProfile();
+        }
+
+        else {
+            $this->showProfile();
+        }
 
 
     }
