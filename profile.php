@@ -98,6 +98,18 @@
       .hidden {
       display: none;
     }
+
+    .centered-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* height: 200px; Set a height for the div */
+    }
+
+    .py-5 {
+    padding-top: none;
+    padding-bottom: none;
+    }
     </style>
 
     <link href="cover.css" rel="stylesheet">
@@ -133,16 +145,55 @@
         </div>
       </header>
 
-    <section id="profile-contents" class="py-5 text-center container">
+    <section id="profile-contents" class="text-center container" style="padding: 5px;">
       <div class="row py-lg-5">
         <div class="mx-auto">
-          <div class="circle">
+
+        <div class="row">
+          <div class="col-2 circle">
             <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
           </div>
-          
-          <h2 class="name"><?=$name?></h2>
 
-    <!-- start of edit modal -->
+            <div class="col-5">
+
+            <div class="row">
+                 <h2 class="name"><?=$name?></h2>
+            </div>
+            <div class="row description centered-text">
+            <p> 
+              
+              <?php 
+              
+              if($description == "") {
+                echo "You have not Created a Description Yet!";
+              }
+              
+              else {
+                  echo $description;
+                }
+               ?>
+            
+            </p>
+
+            </div>
+            </div>
+
+            <div class="col-1">
+              
+              <a style="text-decoration: none;" href="https://instagram.com/<?=$instagram?>">
+              <img class="social" src="assets/images/instagram.png" alt="instagram">
+              </a>
+              <a style="text-decoration: none;" href="https://facebook.com/<?=$facebook?>">
+              <img class="social" src="assets/images/facebook.png" alt="facebook">
+              </a>
+              <a style="text-decoration: none;" href="https://twitter.com/<?=$twitter?>">
+              <img class="social" src="assets/images/twitter.png" alt="twitter">
+              </a>
+            </div>
+
+            <div class="col-1">
+
+            <!-- start of edit modal -->
     <div>
       <button class="btn joinBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</button>
     
@@ -193,46 +244,10 @@
         </div>
       </div>
       <!-- end of edit modal -->
-
-          <div class="row">
-
-            <div class="col-2"></div> <!-- Empty column for spacing -->
-
-            <div class="col-1">
-              
-              <a style="text-decoration: none;" href="https://instagram.com/<?=$instagram?>">
-              <img class="social" src="assets/images/instagram.png" alt="instagram">
-              </a>
-              <a style="text-decoration: none;" href="https://facebook.com/<?=$facebook?>">
-              <img class="social" src="assets/images/facebook.png" alt="facebook">
-              </a>
-              <a style="text-decoration: none;" href="https://twitter.com/<?=$twitter?>">
-              <img class="social" src="assets/images/twitter.png" alt="twitter">
-              </a>
-            </div>
-          
-            <div class="col-6 description">
-            <!-- <p> Hello Y'all I am originally from Chicago, but chose to go to UVA for its proximity to the Blue Ridge Mountains. I have always loved hiking but I do not have a car and would love to discover more hikes through hoosHiking. I am a 4th year student with a but of time on my hands to explore the places aorund me. If you want to link up for some of my suggested hikes or have some suggestions to share let me know!</p>            -->
-          
-            <p> 
-              
-              <?php 
-              
-              if($description == "") {
-                echo "You have not Created a Description Yet!";
-              }
-              
-              else {
-                  echo $description;
-                }
-               ?>
-            
-            </p>
-
             </div>
 
-          </div>
         </div>
+
       </div>
     </section>
 
