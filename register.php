@@ -148,7 +148,7 @@
     </header>
 
 
-    <main class="px-3 loginBox">
+    <main class="px-3 loginBox" style="height: 500px">
         <h1 class="loginTitle">Sign Up Here!</h1>
 
         <?php 
