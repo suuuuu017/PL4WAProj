@@ -101,8 +101,17 @@
     <link href="cover.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <link href="signin.css" rel="stylesheet">
+    <script>
+        function recoveremail() {
+            var user = JSON.parse(localStorage.getItem("user"));
+            if (user != null) {
+                document.getElementById("signinEmail").value = user.email;
+                document.getElementById("password").value = user.password;
+            }
+        }
+    </script>
 </head>
-<body class="d-flex h-100 text-center text-bg-dark bg-image">
+<body class="d-flex h-100 text-center text-bg-dark bg-image" onload="recoveremail();">
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
     <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -145,7 +154,7 @@
             </div>
             <div>
                 <label> Password: </label>
-                <input class="inputBox" type="password" name="password" placeholder="Password" required>
+                <input id="password" class="inputBox" type="password" name="password" placeholder="Password" required>
             </div>
             <div>
                 <button type="submit" class="loginButton" id="loginButton">Log In</button>
@@ -168,4 +177,47 @@
 <!--    };-->
 <!--</script>-->
 </body>
+
+<script>
+    class User {
+        constructor(email, pwd) {
+            this.email = email;
+            this.password = pwd;
+        }
+    }
+
+    document.getElementById("signinEmail").addEventListener("change", function () {
+        var email = document.getElementById("signinEmail").value;
+        if(localStorage.getItem("user") != null) {
+            user = JSON.parse(localStorage.getItem("user"));
+            user.email = email;
+            localStorage.setItem("user", JSON.stringify(user));
+            // console.log(user.getDetails());
+        }
+        else{
+            var user = new User(email, "");
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        // console.log(user.getDetails());
+    });
+
+    document.getElementById("password").addEventListener("change", function () {
+        var email = document.getElementById("password").value;
+        if(localStorage.getItem("user") != null) {
+            user = JSON.parse(localStorage.getItem("user"));
+            user.password = email;
+            localStorage.setItem("user", JSON.stringify(user));
+            console.log(user.password);
+            // console.log(user.getDetails());
+        }
+        else{
+            var user = new User("", email);
+            console.log(user.password);
+
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        // console.log(user.getDetails());
+    });
+
+</script>
 </html>
