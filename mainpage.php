@@ -136,6 +136,10 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+
+        .modal-content {
+            background-color: black;
+        }
     </style>
 
     <!-- Custom styles for this template -->

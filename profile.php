@@ -98,6 +98,10 @@
       .hidden {
       display: none;
     }
+
+    .modal-content {
+      background-color: black;
+    }
     </style>
 
     <link href="cover.css" rel="stylesheet">
