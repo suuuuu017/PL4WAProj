@@ -301,8 +301,8 @@ class controller {
 //                            values ($1, $2, $3, $4, $5, $6, $7, $8);",
 //                $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
 
-            $this->db->query("update userpost set title = $1 where title = $2;", $title, $oldTItle);
-            $this->db->query("update userjoined set title = $1 where title = $2;", $title, $oldTItle);
+            $this->db->query("update userpost set title = $1, date = $3 where title = $2;", $title, $oldTItle, $date);
+            $this->db->query("update userjoined set title = $1, date = $3 where title = $2;", $title, $oldTItle, $date);
 //            $this->db->query("insert into userpost (email, title, date)
 //                            values ($1, $2, $3);",
 //                $_SESSION["email"], $title, $date);

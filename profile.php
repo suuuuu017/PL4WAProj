@@ -10,10 +10,10 @@
     <title>HoosHiking</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="pro.css">
@@ -390,9 +390,35 @@ function all_posts(elementsArray) {
   </body>
 
 <script>
-    // function leavepost($t){
-    //     console.log($t);
-    //     document.getElementById($t).className = "hidden"
-    // }
+    document.getElementById("myFile").addEventListener("change", function() {
+        // $('#myFile').change(function() {
+        var myImg = document.getElementById('myFile').files[0];
+        var fileType = myImg["type"];
+        var imgTypes = ["image/gif", "image/jpeg", "image/png"];
+        if ($.inArray(fileType, imgTypes) < 0) {
+            // TODO: make the alert better
+            alert('The file uploaded needs to be gif, jpeg or png.');
+        }
+        else{
+            // alert('Uploading.');
+            var imgSave = new FormData();
+            imgSave.append(0, myImg);
+            // alert("title is " + myImg["name"]);
+            // alert("img is " + myImg);
+            var aj = new XMLHttpRequest();
+            aj.open("POST", "./imgUpload.php", true);
+            aj.send(imgSave);
+            aj.addEventListener("load", function() {
+                if (this.status === 200) {
+                    var r = this.response;
+                    // alert("here");
+                    // alert(r);
+                }
+                else {
+                    alert("An error occurred");
+                }
+            });
+        }
+    });
 </script>
 </html>
