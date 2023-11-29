@@ -82,6 +82,7 @@ class controller {
                 $this->leavePost();
                 break;
 
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -104,8 +105,8 @@ class controller {
     }
 
     public function attachtoprofileDiv($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
-        $profileDiv = $pd. "<div class = \"my-post\" id =\"$date\"> 
-        
+        $profileDiv = $pd. "<form action=\"?command=editPost\" method=\"post\">
+            <div class = \"my-post\" id =\"$date\"> 
                 <div class=\"card postBox CustomCol-4\" >
 					<img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                       <div class=\"card-body\">
@@ -150,7 +151,7 @@ class controller {
                                         </div>
                                         <div class=\"modal-footer\">
                     <!--                        TODO: change color scheme of the btn to match the whole website-->
-                                            <button type=\"submit\" class=\"btn joinBtn\" data-bs-dismiss=\"modal\">Change</button>
+                                            <button type=\"submit\" class=\"btn joinBtn\" data-bs-dismiss=\"modal\" value='$t' name='change' id='change'>Change</button>
                                         </div>
                                     </div>
                                   </form>
@@ -159,7 +160,8 @@ class controller {
                         </div>
                       </div>
 				</div>
-                </div>";
+                </div>
+                </form>";
         return $profileDiv;
     }
 
@@ -242,7 +244,75 @@ class controller {
     }
 
     public function editPost(){
+        if(isset($_POST["postName"]) == true) {
+            $title = $_POST["postName"];
+            $description = $_POST["description"];
+            $img = $_POST["img"];
+            $date = $_POST["myDate"];
+            $time = $_POST["myTime"];
+            $par = $_POST["myPar"];
+            $oldTItle = $_POST["change"];
+            $msg = "";
 
+            if (empty($title)) {
+                $msg = "No title";
+            }
+            if (empty($description)) {
+                $msg = "No description";
+            }
+            if (empty($img)) {
+                $msg = "No image";
+            }
+            if (empty($date)) {
+                $msg = "No date";
+            }
+            if (empty($time)) {
+                $msg = "No time";
+            }
+            if (empty($par)) {
+                $msg = "No participants number";
+            }
+
+
+            if (!empty($msg)) {
+                //TODO; need to leave upper margin
+                $message = "<div class=\"alert alert-danger \" role=\"alert\">
+                 $msg  
+                 </div>";
+                // TODO: add message on profile
+                $this->showProfile($message);
+                return;
+            }
+
+            //TODO: need to verify input
+
+            $content = array();
+            $content[0] = $title;
+            $content[1] = $description;
+            $content[2] = $img;
+            $content[3] = $date;
+            $content[4] = $time;
+            $content[5] = $par;
+            $id = $this->db->query("select id from posts where title = $1;", $oldTItle)[0]["id"];
+            $oldPar = $this->db->query("select parnum from posts where title = $1;", $oldTItle)[0]["parnum"];
+            $this->db->query("update posts set title = $1, description = $2, pic = $3, date = $4, time = $5, parnum = $6 where id = $7;",
+                $title, $description, $img, $date, $time, $par - $oldPar, $id);
+//            $this->db->query("insert into posts (title, description, pic, date, time, parNum, postTime, currenPar)
+//                            values ($1, $2, $3, $4, $5, $6, $7, $8);",
+//                $title, $description, $img, $date, $time, $par, date("Y-m-d H:i:s"), 0);
+
+            $this->db->query("update userpost set title = $1 where title = $2;", $title, $oldTItle);
+            $this->db->query("update userjoined set title = $1 where title = $2;", $title, $oldTItle);
+//            $this->db->query("insert into userpost (email, title, date)
+//                            values ($1, $2, $3);",
+//                $_SESSION["email"], $title, $date);
+//            $this->db->query("insert into userjoined (email, title, date)
+//                            values ($1, $2, $3);",
+//                $_SESSION["email"], $title, $date);
+
+            $_POST = array();
+            $this->showProfile();
+        }
     }
 
     public function leavePost(){
@@ -254,7 +324,7 @@ class controller {
     }
 
 
-    public function showProfile($twitter = "", $instagram = "", $facebook = ""){
+    public function showProfile($twitter = "", $instagram = "", $facebook = "", $msg=""){
         $email = $_SESSION["email"];
         $res = $this->db->query("select * from users where email = $1;", $email);
         $name="";
@@ -266,6 +336,7 @@ class controller {
             $description = $res[0]["description"];
         }
         $profileDiv = $this->showUserPost();
+        $message = $msg;
         include("profile.php");
     }
     public function register($message = "",$email="", $username="") {
