@@ -232,8 +232,8 @@
                             </div>
                             <div>
 
-                                <textarea class="descriptionBox" type="text" name="description" placeholder="Description" rows="4" cols="50" required> </textarea>
-                            </div>
+                                <textarea class="descriptionBox" id="description" type="text" name="description" placeholder="Description"
+                                          rows="4" cols="50" required> </textarea>
                             <div class="addImgBox">
                                 <label for="myFile" class="addImgText">Picture for the post:</label>
                                 <input type="file" id="myFile" name="img" required>

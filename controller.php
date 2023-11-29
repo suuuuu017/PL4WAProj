@@ -396,24 +396,25 @@ class controller {
         return $cardDiv;
     }
     public function attach2cardiv($content, $cardDiv){
-
+        $tmp = str_replace(' ', '', $content[0]);
+        echo "<script>console.log(\"$content[0]\");</script>";
         // or maybe it would be easier to inject information about the date and time in the html body and have a script in the profile page to manipulate with javascript
         $cardDiv = $cardDiv . "<form action=\"?command=join\" method=\"post\">
                                     <div class=\"card postBox CustomCol-4\" >
                                         <img src=\"./imgData/$content[2]\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
                                         <div class=\"card-body\">
-                                            <input type=\"hidden\" name=\"joinedTitle\" value=$content[0]>
+                                            <input type=\"hidden\" name=\"joinedTitle\" value=\"$content[0]\">
                                             <input type=\"hidden\" name=\"joinDes\" value=$content[1]>
                                             <input type=\"hidden\" name=\"date\" value=$content[3]>
 
-                                            <h2 class=\"card-title\" name=\"joinedTitle\" value=$content[0]>$content[0]</h2>
-                                            <p class=\"card-text\" name=\"joinedDate\" value=$content[3]>Date: $content[3]</p>
-                                            <p class=\"card-text\" name=\"joinedPer\" value=$content[5]>Spots open: $content[5]</p>
-                                            <p class=\"card-text\" name=\"joinedDes\" value=$content[1]>$content[1]</p>
-                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform$content[0]Modal\">
+                                            <h2 class=\"card-title\" name=\"joinedTitle\" >$content[0]</h2>
+                                            <p class=\"card-text\" name=\"joinedDate\" >Date: $content[3]</p>
+                                            <p class=\"card-text\" name=\"joinedPer\" >Spots open: $content[5]</p>
+                                            <p class=\"card-text\" name=\"joinedDes\" >$content[1]</p>
+                                            <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#joinform{$tmp}Modal\">
                                                 Join
                                             </button>
-                                            <div class=\"modal fade\" id=\"joinform$content[0]Modal\" tabindex=\"-1\" aria-labelledby=\"joinform$content[0]ModalLabel\" aria-hidden=\"true\">
+                                            <div class=\"modal fade\" id=\"joinform{$tmp}Modal\" tabindex=\"-1\" aria-labelledby=\"joinform{$tmp}ModalLabel\" aria-hidden=\"true\">
                                                 <div class=\"modal-dialog\">
                                                     <div class=\"modal-content\">
                                                         <div class=\"modal-body\">
@@ -481,6 +482,7 @@ class controller {
     public function createPost(){
         if(isset($_POST["postName"]) == true){
             $title = $_POST["postName"];
+            $title = trim($title);
             $description = $_POST["description"];
             $img = $_POST["img"];
             $date = $_POST["myDate"];
@@ -573,7 +575,7 @@ class controller {
         else{
 //            echo "<script>console.log(\"no titile\");</script>";
         }
-
+        $joinTitle = trim($joinTitle);
         $message = "";
 //        print_r($_POST);
         if(!empty($_POST["joinedTitle"])) {
