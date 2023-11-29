@@ -166,6 +166,7 @@ class controller {
     }
 
     public function attachtoprofileDivJoin($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
+        $tmp = str_replace(' ', '', $t);
         $profileDiv = $pd. "<form id= \"$t\" action=\"?command=leave\" method=\"post\">
             <div class = \"my-post\" id =\"$date\"> 
                 <div class=\"card postBox CustomCol-4\" >
@@ -177,10 +178,10 @@ class controller {
                         <p class=\"card-text\">$d</p>
                             <!-- start of edit modal -->
                         
-                        <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#leaveform{$t}Modal\">
+                        <button type=\"button\" class=\"btn btn-primary joinBtn\" data-bs-toggle=\"modal\" data-bs-target=\"#leaveform{$tmp}Modal\">
                             Leave
                         </button>
-                        <div class=\"modal fade\" id=\"leaveform{$t}Modal\" tabindex=\"-1\" aria-labelledby=\"leaveform{$t}ModalLabel\" aria-hidden=\"true\">
+                        <div class=\"modal fade\" id=\"leaveform{$tmp}Modal\" tabindex=\"-1\" aria-labelledby=\"leaveform{$tmp}ModalLabel\" aria-hidden=\"true\">
                             <div class=\"modal-dialog\">
                                 <div class=\"modal-content\">
                                     <div class=\"modal-body\">
@@ -188,7 +189,7 @@ class controller {
                                     </div>
                                     <div class=\"modal-footer\">
                                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
-                                        <button type=\"submit\" class=\"btn btn-light\" name=\"leave\" id=\"leave\" value=$t >Yes</button>
+                                        <button type=\"submit\" class=\"btn btn-light\" name=\"leave\" id=\"leave\" value=\"$t\" >Yes</button>
                                     </div>
                                 </div>
                             </div>
