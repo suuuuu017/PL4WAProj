@@ -387,10 +387,9 @@ function all_posts(elementsArray) {
   </body>
 
 <script>
-    function leavepost(){
-        console.log("leavepost");
-
-
-    }
+    // function leavepost($t){
+    //     console.log($t);
+    //     document.getElementById($t).className = "hidden"
+    // }
 </script>
 </html>

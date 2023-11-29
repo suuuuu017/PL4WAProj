@@ -78,6 +78,10 @@ class controller {
                 echo $data;
                 break;
 
+            case "leave":
+                $this->leavePost();
+                break;
+
             default:
 //                echo "<script>console.log('shouldnt be here');</script>";
                 $this->showWelcome();
@@ -160,7 +164,7 @@ class controller {
     }
 
     public function attachtoprofileDivJoin($pd="", $t="", $d="", $spots = 0, $date = "XX-XX-XXXX", $pic = ""){
-        $profileDiv = $pd. "<form action=\"?command=leave\" method=\"post\">
+        $profileDiv = $pd. "<form id= \"$t\" action=\"?command=leave\" method=\"post\">
             <div class = \"my-post\" id =\"$date\"> 
                 <div class=\"card postBox CustomCol-4\" >
 					<img src=\"./imgData/$pic\" class=\"card-img-top postImg\" alt=\"mountains and sky\">
@@ -182,7 +186,7 @@ class controller {
                                     </div>
                                     <div class=\"modal-footer\">
                                         <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">No</button>
-                                        <button type=\"button\" class=\"btn btn-light\" name=\"leave\" value=\"true\" onclick='leavepost(); return false;'>Yes</button>
+                                        <button type=\"submit\" class=\"btn btn-light\" name=\"leave\" id=\"leave\" value=$t >Yes</button>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +246,11 @@ class controller {
     }
 
     public function leavePost(){
-
+        $title = $_POST["leave"];
+        $email = $_SESSION["email"];
+        $this->db->query("delete from userjoined where email = $1 and title = $2;", $email, $title);
+        $this->db->query("update posts set parnum = parnum + 1 where title = $1;", $title);
+        $this->showProfile();
     }
 
 
@@ -506,7 +514,7 @@ class controller {
                 if(empty($ifjoined)) {
                     $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
                     $tmpDate = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["date"];
-                    if ($tmpPar > 0) {
+                    if ($tmpPar > -1) {
                         $this->db->query("insert into userjoined (email, title, date) 
                             values ($1, $2, $3);",
                             $_SESSION["email"], $joinTitle, $tmpDate);
