@@ -222,7 +222,7 @@
               <?php 
               
               if($description == "") {
-                echo "You have not Created a Description Yet!";
+                echo "You have not created a Description Yet!";
               }
               
               else {
@@ -259,7 +259,7 @@
         <?php 
               
               if($profileDiv == "") {
-                echo "You have not posted any trips yet!";
+                echo "You have not posted/joined any trips yet!";
               }
               
               else {

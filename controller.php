@@ -616,7 +616,7 @@ class controller {
         $m1 = "";
 
         $_SESSION["email"] = $_POST['email'];
-        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['userName'] = $_POST['username'];
 
         if ($_POST['email'] != "") {
             if ($this->is_uva_email($_POST['email']) !== 1) {
@@ -651,7 +651,7 @@ class controller {
         else {
             $message = "<div class=\"alert alert-danger\" role=\"alert\">
             $m1 </div>";
-            $this->register($message, $_SESSION['email'], $_SESSION['username']);
+            $this->register($message, $_SESSION['email'], $_SESSION['userName']);
         }
 
     }
