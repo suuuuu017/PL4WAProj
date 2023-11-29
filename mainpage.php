@@ -231,7 +231,8 @@
                                 <input class="postNameBox" type="text" id="myTitle" name="postName" placeholder="New Adventure" required>
                             </div>
                             <div>
-                                <input class="descriptionBox" type="text" name="description" placeholder="Description" required>
+
+                                <textarea class="descriptionBox" type="text" name="description" placeholder="Description" rows="4" cols="50" required> </textarea>
                             </div>
                             <div class="addImgBox">
                                 <label for="myFile" class="addImgText">Picture for the post:</label>

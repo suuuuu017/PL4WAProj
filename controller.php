@@ -130,7 +130,7 @@ class controller {
                                                 <input class=\"postNameBox\" type=\"text\" name=\"postName\" placeholder=\"New Adventure\" required>
                                             </div>
                                             <div>
-                                                <input class=\"descriptionBox\" type=\"text\" name=\"description\" placeholder=\"Description\" required>
+                                                <textarea class=\"descriptionBox\" type=\"text\" name=\"description\" placeholder=\"Description\" rows=\"4\" cols=\"50\" required></textarea>
                                             </div>
                                             <div class=\"addImgBox\">
                                                 <label for=\"myFile\" class=\"addImgText\">Picture for the post:</label>
@@ -585,7 +585,7 @@ class controller {
                 if(empty($ifjoined)) {
                     $tmpPar = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["parnum"];
                     $tmpDate = $this->db->query("select * from posts where title = $1;", $_POST["joinedTitle"])[0]["date"];
-                    if ($tmpPar > -1) {
+                    if ($tmpPar > 0) {
                         $this->db->query("insert into userjoined (email, title, date) 
                             values ($1, $2, $3);",
                             $_SESSION["email"], $joinTitle, $tmpDate);
@@ -678,20 +678,20 @@ class controller {
         if(isset($_POST['userName']) && isset($_POST['description'])) {
            $_SESSION['userName'] = $_POST['userName'];
            $_SESSION['description'] = $_POST['description'];
-           $_SESSION['twitter'] = $_POST['twitter'];
-           $_SESSION['instagram'] = $_POST['instagram'];
-           $_SESSION['facebook'] = $_POST['facebook'];
-
-           $twitter = $_SESSION['twitter'];
-           $instagram = $_SESSION['instagram'];
-           $facebook = $_SESSION['facebook'];
+//           $_SESSION['twitter'] = $_POST['twitter'];
+//           $_SESSION['instagram'] = $_POST['instagram'];
+//           $_SESSION['facebook'] = $_POST['facebook'];
+//
+//           $twitter = $_SESSION['twitter'];
+//           $instagram = $_SESSION['instagram'];
+//           $facebook = $_SESSION['facebook'];
 
         $email = $_SESSION["email"];
         $newName = $_POST["userName"];
         $newDes = $_POST["description"];
         //TODO: update profile photo too
         $this->db->query("update users set name = $1, description = $2 where email = $3;", $newName, $newDes, $email);
-        $this->showProfile($twitter, $instagram, $facebook);
+        $this->showProfile();
     }
     else {
 

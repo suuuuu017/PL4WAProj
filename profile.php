@@ -137,13 +137,13 @@
         <?=$message?>
     </div>
     <section id="profile-contents" class="py-5 text-center container">
-      <div class="row py-lg-5">
+      <div class="row">
         <div class="mx-auto">
-          <div class="circle">
-            <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">
-          </div>
+<!--          <div class="circle">-->
+<!--            <img id="profilephoto" src="assets/images/profile_photo.jpg" alt="profile-photo" class="rounded-circle">-->
+<!--          </div>-->
           
-          <h2 class="name"><?=$name?></h2>
+          <h3 class="name"><?=$name?></h3>
 
     <!-- start of edit modal -->
     <div>
@@ -159,33 +159,33 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                          <label style="color: black" for="userName">Your name or Username:</label>
-                            <input value="<?=$name?>" style="color: black" class="postNameBox" type="text" name="userName" required>
+                          <label for="userName">Your name or Username:</label>
+                            <input value="<?=$name?>" class="postNameBox" type="text" name="userName" required>
                         </div>
                         <div>
-                          <label style="color: black" for="description">About You:</label>
-                            <textarea id="description" name="description" rows="4" cols="50"><?=$description?></textarea>
+                          <label  for="description">About You:</label>
+                            <textarea class="descriptionBox" id="description" name="description" rows="4" cols="50"><?=$description?></textarea>
                         </div>
 
-                        <div>
-                          <label style="color: black" for="twitter">Enter Your Twitter:</label>
-                            <input value="<?= $twitter?>" style="color: black" class="postNameBox" type="text" name="twitter">
-                        </div>
-
-                        <div>
-                          <label style="color: black" for="instagram">Enter Your Instagram:</label>
-                            <input value="<?=$instagram?>" style="color: black" class="postNameBox" type="text" name="instagram">
-                        </div>
-
-                        <div>
-                          <label style="color: black" for="facebook">Enter Your Facebook:</label>
-                            <input value="<?=$facebook?>" style="color: black" class="postNameBox" type="text" name="facebook">
-                        </div>
-
-                        <div class="addImgBox">
-                            <label style="color: black" for="myImage" class="addImgText">Upload a new Profile Photo:</label>
-                            <input type="file" id="myImage" name="profileImage">
-                        </div>
+<!--                        <div>-->
+<!--                          <label style="color: black" for="twitter">Enter Your Twitter:</label>-->
+<!--                            <input value="--><?php //= $twitter?><!--" class="postNameBox" type="text" name="twitter">-->
+<!--                        </div>-->
+<!---->
+<!--                        <div>-->
+<!--                          <label style="color: black" for="instagram">Enter Your Instagram:</label>-->
+<!--                            <input value="--><?php //=$instagram?><!--"  class="postNameBox" type="text" name="instagram">-->
+<!--                        </div>-->
+<!---->
+<!--                        <div>-->
+<!--                          <label style="color: black" for="facebook">Enter Your Facebook:</label>-->
+<!--                            <input value="--><?php //=$facebook?><!--" class="postNameBox" type="text" name="facebook">-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="addImgBox">-->
+<!--                            <label style="color: black" for="myImage" class="addImgText">Upload a new Profile Photo:</label>-->
+<!--                            <input type="file" id="myImage" name="profileImage">-->
+<!--                        </div>-->
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn joinBtn" data-bs-dismiss="modal">Save</button>
@@ -202,16 +202,16 @@
             <div class="col-2"></div> <!-- Empty column for spacing -->
 
             <div class="col-1">
-              
-              <a style="text-decoration: none;" href="https://instagram.com/<?=$instagram?>">
-              <img class="social" src="assets/images/instagram.png" alt="instagram">
-              </a>
-              <a style="text-decoration: none;" href="https://facebook.com/<?=$facebook?>">
-              <img class="social" src="assets/images/facebook.png" alt="facebook">
-              </a>
-              <a style="text-decoration: none;" href="https://twitter.com/<?=$twitter?>">
-              <img class="social" src="assets/images/twitter.png" alt="twitter">
-              </a>
+<!--              -->
+<!--              <a style="text-decoration: none;" href="https://instagram.com/--><?php //=$instagram?><!--">-->
+<!--              <img class="social" src="assets/images/instagram.png" alt="instagram">-->
+<!--              </a>-->
+<!--              <a style="text-decoration: none;" href="https://facebook.com/--><?php //=$facebook?><!--">-->
+<!--              <img class="social" src="assets/images/facebook.png" alt="facebook">-->
+<!--              </a>-->
+<!--              <a style="text-decoration: none;" href="https://twitter.com/--><?php //=$twitter?><!--">-->
+<!--              <img class="social" src="assets/images/twitter.png" alt="twitter">-->
+<!--              </a>-->
             </div>
           
             <div class="col-6 description">
@@ -239,7 +239,7 @@
       </div>
     </section>
 
-    <main class="px-3">
+    <main class="px-3" style="padding-top: 1rem!important;">
       <div class="card text-center">
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">
